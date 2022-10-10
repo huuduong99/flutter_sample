@@ -47,6 +47,7 @@ app.*.map.json
 /android/app/release
 /ios/Podfile.lock
 
-# Freezed related
+# Build runner related
 *.freezed.dart
 *.g.dart
+/lib/gen/
