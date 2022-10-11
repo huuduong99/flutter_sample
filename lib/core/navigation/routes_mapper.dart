@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:push_notification_fcm/features/category/category_page.dart';
+import 'package:push_notification_fcm/features/home/home_page.dart';
 import '../../features/media_detail/media_detail_page.dart';
 import 'app_route.dart';
 import 'arguments/argument.dart';
@@ -25,7 +25,7 @@ class RoutesMapper {
 
   /// Return route without settings.
   static Map<String, WidgetBuilder> buildRoute() => {
-        AppRoute.category: (BuildContext context) => const CategoryPage(),
+        AppRoute.home: (BuildContext context) => const HomePage(),
       };
 
   static Route _buildRoute({

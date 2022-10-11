@@ -7,7 +7,7 @@ class MediaDetailPage extends StatelessWidget {
   const MediaDetailPage({Key? key, required this.imageDetails})
       : super(key: key);
 
-  final ImageDetails imageDetails;
+  final ImageDetail imageDetails;
 
   @override
   Widget build(BuildContext context) {

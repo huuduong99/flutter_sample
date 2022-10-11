@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
@@ -23,8 +22,6 @@ class BackgroundNotification {
   );
   static final PublishSubject<String> _eventSubjectTapped =
       PublishSubject<String>();
-  static final PublishSubject<String> _eventSubjectAdded =
-      PublishSubject<String>();
 
   static bool _isInit = false;
 
@@ -33,60 +30,34 @@ class BackgroundNotification {
   static Stream<String> get listenOnNotificationTapped =>
       _eventSubjectTapped.stream;
 
-  static List<AppNotification> _recentNotifications = [];
-
   static Future<void> init() async {
     if (_isInit) {
       return;
     }
     _initSetting();
-    _listenNotification();
     _isInit = true;
     _logger.d('BackgroundNotification init');
-  }
-
-  static void _listenNotification() {
-    _eventSubjectAdded.listen((event) async {
-      final AppNotification newAppNotification =
-          AppNotification.fromJson(jsonDecode(event));
-
-      bool contain = _recentNotifications.any((appNotification) =>
-          (appNotification.id == newAppNotification.id) &&
-          (appNotification.parentId == newAppNotification.parentId));
-
-      if (contain) {
-        return;
-      }
-
-      _recentNotifications.add(newAppNotification);
-      _logger.d('appNotifications: ${_recentNotifications.length}');
-
-      if (_recentNotifications.length == 50) {
-        _resetRecentList();
-      }
-
-      await _pushNotification(
-          id: 0,
-          title: newAppNotification.title,
-          body: newAppNotification.body,
-          payload: event);
-    });
   }
 
   static Future<void> firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
     final payload = message.data['Payload'] ?? message.data['payload'];
     if (payload != null) {
-      addNotification(payload: payload);
+      _handleShowNotification(payload);
       return;
     }
     return;
   }
 
-  static void addNotification({
-    required String payload,
-  }) {
-    _eventSubjectAdded.add(payload);
+  static Future<void> _handleShowNotification(String payload) async {
+    final AppNotification newAppNotification =
+        AppNotification.fromJson(jsonDecode(payload));
+
+    await _pushNotification(
+        id: 0,
+        title: newAppNotification.title,
+        body: newAppNotification.body,
+        payload: payload);
   }
 
   static Future<void> _pushNotification({
@@ -184,10 +155,5 @@ class BackgroundNotification {
   static void setPayload({required String payload}) {
     _eventSubjectTapped.add(payload);
     _logger.d('notification payload: $payload');
-  }
-
-  static void _resetRecentList() {
-    _recentNotifications =
-        _recentNotifications.sublist(_recentNotifications.length - 2);
   }
 }

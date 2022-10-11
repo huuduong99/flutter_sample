@@ -12,5 +12,5 @@ class MediaDetailArgs extends RouteArgs {
     required this.imageDetails,
   });
 
-  final ImageDetails imageDetails;
+  final ImageDetail imageDetails;
 }

@@ -1,4 +1,4 @@
-class ImageDetails {
+class ImageDetail {
   final int index;
   final String imagePath;
   final String price;
@@ -6,7 +6,7 @@ class ImageDetails {
   final String title;
   final String details;
 
-  ImageDetails({
+  ImageDetail({
     required this.index,
     required this.imagePath,
     required this.price,
