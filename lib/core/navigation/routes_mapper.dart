@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:push_notification_fcm/features/booking/booking_page.dart';
 import 'package:push_notification_fcm/features/home/home_page.dart';
 import '../../features/media_detail/media_detail_page.dart';
 import 'app_route.dart';
@@ -15,6 +16,16 @@ class RoutesMapper {
             settings.arguments! as MediaDetailArgs;
         return _buildRoute(
           page: MediaDetailPage(
+            user: arguments.user,
+          ),
+          settings: settings,
+        );
+
+      case AppRoute.booking:
+        final BookingArgs arguments =
+        settings.arguments! as BookingArgs;
+        return _buildRoute(
+          page: BookingPage(
             user: arguments.user,
           ),
           settings: settings,

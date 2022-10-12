@@ -14,3 +14,11 @@ class MediaDetailArgs extends RouteArgs {
 
   final User user;
 }
+
+class BookingArgs extends RouteArgs {
+  const BookingArgs({
+    required this.user,
+  });
+
+  final User user;
+}

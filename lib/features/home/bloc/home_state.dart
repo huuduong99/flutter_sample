@@ -9,6 +9,7 @@ class HomeState with _$HomeState {
     @Default(HomeStatus.initial) HomeStatus status,
     @Default([]) List<User> users,
     String? errorMessage,
+    @Default(0) int tabIndex,
   }) = _HomeState;
 }
 

@@ -1,3 +1,4 @@
+import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -29,9 +30,10 @@ class _HomePageState extends State<HomePage> {
     return BlocProvider<HomeBloc>.value(
       value: _homeBloc,
       child: Scaffold(
-        backgroundColor: Colors.redAccent,
-        appBar: _buildAppbar(),
+        backgroundColor: Colors.white,
+        // appBar: _buildAppbar(),
         body: _buildBody(),
+        bottomNavigationBar: _buildOriginDesign(),
       ),
     );
   }
@@ -54,9 +56,6 @@ class _HomePageState extends State<HomePage> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              const SizedBox(
-                height: 10,
-              ),
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -101,6 +100,37 @@ class _HomePageState extends State<HomePage> {
           );
         },
         listener: (context, state) {});
+  }
+
+  Widget _buildOriginDesign() {
+    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+      return CustomNavigationBar(
+        iconSize: 30.0,
+        selectedColor: Theme.of(context).primaryColor,
+        strokeColor: Theme.of(context).primaryColor,
+        unSelectedColor: Colors.grey[600],
+        backgroundColor: Colors.white,
+        borderRadius: const Radius.circular(20.0),
+        blurEffect: false,
+        scaleCurve: Curves.linear,
+        items: [
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.home),
+          ),
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.travel_explore),
+          ),
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.account_circle),
+          ),
+        ],
+        isFloating: true,
+        currentIndex: state.tabIndex,
+        onTap: (index) {
+          _homeBloc.add(HomeTabIndexChanged(index: index));
+        },
+      );
+    });
   }
 }
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:push_notification_fcm/core/navigation/app_route.dart';
+import 'package:push_notification_fcm/core/navigation/arguments/argument.dart';
 import 'package:push_notification_fcm/models/user.dart';
 
+import '../../core/app.dart';
 import '../../widgets/app_button.dart';
 
 class MediaDetailPage extends StatelessWidget {
@@ -90,11 +93,14 @@ class MediaDetailPage extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: AppButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        App.pushNamed(
+                            AppRoute.booking, BookingArgs(user: user));
+                      },
                       title: 'Booking',
-                      backgroundColor: Colors.redAccent,
+                      backgroundColor: Theme.of(context).primaryColor,
                       titleColor: Colors.white,
-                      borderColor: Colors.redAccent,
+                      borderColor: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],

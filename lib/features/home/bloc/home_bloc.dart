@@ -31,14 +31,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _dialogService = dialogService;
 
     final notificationOnMessageTapped =
-    BackgroundNotification.listenOnNotificationTapped.listen(
-          (data) {
+        BackgroundNotification.listenOnNotificationTapped.listen(
+      (data) {
         _handleNotifyMessage(data);
       },
     );
     _notificationStreamSubscription.add(notificationOnMessageTapped);
 
     on<HomeLoaded>(_onHomeLoaded);
+    on<HomeTabIndexChanged>(_onTabIndexChanged);
     on<HomeHandleWithInitialFcmPayload>(_onHandleWithInitialFcmPayload);
   }
 
@@ -259,6 +260,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       _dialogService.pushNamed(
           AppRoute.mediaDetail, MediaDetailArgs(user: user));
     }
+  }
+
+  FutureOr<void> _onTabIndexChanged(
+      HomeTabIndexChanged event, Emitter<HomeState> emit) {
+    emit(
+      state.copyWith(errorMessage: null, tabIndex: event.index),
+    );
   }
 
   @override
