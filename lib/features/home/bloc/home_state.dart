@@ -7,7 +7,7 @@ class HomeState with _$HomeState {
 
   const factory HomeState({
     @Default(HomeStatus.initial) HomeStatus status,
-    @Default([]) List<ImageDetail> imageDetails,
+    @Default([]) List<User> users,
     String? errorMessage,
   }) = _HomeState;
 }

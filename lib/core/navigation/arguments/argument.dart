@@ -1,4 +1,4 @@
-import 'package:push_notification_fcm/models/image_details.dart';
+import 'package:push_notification_fcm/models/user.dart';
 
 class RouteArgs {
   const RouteArgs();
@@ -9,8 +9,8 @@ class RouteArgs {
 
 class MediaDetailArgs extends RouteArgs {
   const MediaDetailArgs({
-    required this.imageDetails,
+    required this.user,
   });
 
-  final ImageDetail imageDetails;
+  final User user;
 }

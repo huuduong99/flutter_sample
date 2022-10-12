@@ -12,13 +12,7 @@ class AppNotification with _$AppNotification {
     String? body,
     String? title,
     DateTime? creationTime,
-    int? notifyStatus,
-    String? notifyStatusText,
-    String? app,
-    String? tenantId,
-    int? objectId,
-    int? notificationType,
-    int? parentId,
+    int? userId,
   }) = _AppNotification;
 
   factory AppNotification.fromJson(Map<String, dynamic> json) =>

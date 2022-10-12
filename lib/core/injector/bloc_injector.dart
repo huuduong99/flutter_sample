@@ -7,6 +7,7 @@ class BLocInjector {
     injector.registerLazySingleton<HomeBloc>(
       () => HomeBloc(
         fcmService: injector(),
+        dialogService: injector(),
       ),
     );
   }

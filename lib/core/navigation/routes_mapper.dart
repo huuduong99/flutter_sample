@@ -15,7 +15,7 @@ class RoutesMapper {
             settings.arguments! as MediaDetailArgs;
         return _buildRoute(
           page: MediaDetailPage(
-            imageDetails: arguments.imageDetails,
+            user: arguments.user,
           ),
           settings: settings,
         );

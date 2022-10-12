@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:push_notification_fcm/core/app.dart';
 import 'package:push_notification_fcm/core/locator/locator.dart' as di;
 
 import 'core/navigation/app_route.dart';
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
       routes: RoutesMapper.buildRoute(),
       onGenerateRoute: (RouteSettings settings) =>
           RoutesMapper.onGenerateRoute(settings),
+      navigatorKey: App.navigatorKey,
     );
   }
 }

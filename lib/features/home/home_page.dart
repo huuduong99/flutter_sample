@@ -8,9 +8,7 @@ import 'package:push_notification_fcm/features/home/bloc/home_bloc.dart';
 import '../../core/navigation/arguments/argument.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, this.title = 'Gallery'}) : super(key: key);
-
-  final String title;
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _HomePageState();
@@ -22,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _homeBloc.add(const HomeLoaded());
+    _homeBloc.add(const HomeHandleWithInitialFcmPayload());
     super.initState();
   }
 
@@ -40,9 +39,9 @@ class _HomePageState extends State<HomePage> {
   PreferredSizeWidget _buildAppbar() {
     return AppBar(
       backgroundColor: Colors.redAccent,
-      title: Text(
-        widget.title,
-        style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+      title: const Text(
+        'Gallery',
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
       ),
       centerTitle: true,
       elevation: 0,
@@ -73,24 +72,24 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: MasonryGridView.count(
                     physics: const ClampingScrollPhysics(),
-                    itemCount: state.imageDetails.length,
+                    itemCount: state.users.length,
                     crossAxisCount: 2,
                     mainAxisSpacing: 4,
                     crossAxisSpacing: 4,
                     itemBuilder: (context, index) {
-                      final image = state.imageDetails[index];
+                      final user = state.users[index];
                       return RawMaterialButton(
                         onPressed: () {
                           Navigator.pushNamed(
                             context,
                             AppRoute.mediaDetail,
-                            arguments: MediaDetailArgs(imageDetails: image),
+                            arguments: MediaDetailArgs(user: user),
                           );
                         },
                         child: Hero(
-                          tag: 'logo${image.index}',
+                          tag: 'logo${user.id}',
                           child: _ImageViewer(
-                            url: image.imagePath,
+                            url: user.imagePath ?? '',
                           ),
                         ),
                       );

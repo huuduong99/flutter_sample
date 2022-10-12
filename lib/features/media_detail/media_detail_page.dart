@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:push_notification_fcm/models/image_details.dart';
+import 'package:push_notification_fcm/models/user.dart';
 
 import '../../widgets/app_button.dart';
 
 class MediaDetailPage extends StatelessWidget {
-  const MediaDetailPage({Key? key, required this.imageDetails})
-      : super(key: key);
+  const MediaDetailPage({Key? key, required this.user}) : super(key: key);
 
-  final ImageDetail imageDetails;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class MediaDetailPage extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Hero(
-              tag: 'logo${imageDetails.index}',
+              tag: 'logo${user.id}',
               child: Stack(
                 children: [
                   Container(
@@ -25,7 +24,7 @@ class MediaDetailPage extends StatelessWidget {
                           bottomLeft: Radius.circular(30),
                           bottomRight: Radius.circular(30)),
                       image: DecorationImage(
-                        image: NetworkImage(imageDetails.imagePath),
+                        image: NetworkImage(user.imagePath ?? ''),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -53,7 +52,7 @@ class MediaDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          imageDetails.title,
+                          user.title ?? '',
                           style: const TextStyle(
                             color: Colors.redAccent,
                             fontSize: 22,
@@ -61,13 +60,13 @@ class MediaDetailPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'By ${imageDetails.photographer}',
+                          'By ${user.photographer}',
                           style: const TextStyle(
                             fontSize: 10,
                           ),
                         ),
                         Text(
-                          imageDetails.price,
+                          user.price ?? '',
                           style: const TextStyle(
                             color: Colors.redAccent,
                             fontSize: 18,
@@ -78,7 +77,7 @@ class MediaDetailPage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          imageDetails.details,
+                          user.details ?? '',
                           style: const TextStyle(
                             fontSize: 14,
                           ),

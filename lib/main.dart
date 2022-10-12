@@ -30,7 +30,7 @@ Future<void> main() async {
     print(message);
   });
 
-  print(await FirebaseMessaging.instance.getToken());
+  print('fcmToken: ${await FirebaseMessaging.instance.getToken()}');
 
   runApp(const RestartWidget(child: MyApp()));
 }
