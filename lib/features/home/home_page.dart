@@ -2,9 +2,11 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:push_notification_fcm/core/constant/spacer.dart';
 import 'package:push_notification_fcm/core/locator/locator.dart';
 import 'package:push_notification_fcm/core/navigation/app_route.dart';
 import 'package:push_notification_fcm/features/home/bloc/home_bloc.dart';
+import 'package:push_notification_fcm/widgets/circle_avatar_image.dart';
 
 import '../../core/navigation/arguments/argument.dart';
 
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     return BlocProvider<HomeBloc>.value(
       value: _homeBloc,
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF1F4F6),
         // appBar: _buildAppbar(),
         body: _buildBody(),
         bottomNavigationBar: _buildOriginDesign(),
@@ -53,53 +55,121 @@ class _HomePageState extends State<HomePage> {
   Widget _buildBody() {
     return BlocConsumer<HomeBloc, HomeState>(
         builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 6,
-                    vertical: 10,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(16),
-                      topRight: Radius.circular(16),
-                    ),
-                  ),
-                  child: MasonryGridView.count(
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: state.users.length,
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 4,
-                    crossAxisSpacing: 4,
-                    itemBuilder: (context, index) {
-                      final user = state.users[index];
-                      return RawMaterialButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoute.mediaDetail,
-                            arguments: MediaDetailArgs(user: user),
-                          );
-                        },
-                        child: Hero(
-                          tag: 'logo${user.id}',
-                          child: _ImageViewer(
-                            url: user.imagePath ?? '',
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+          return IndexedStack(
+            index: _homeBloc.state.tabIndex,
+            children: [
+              _home(state),
+              _discovery(state),
+              const SizedBox(
+                child: Center(
+                  child: Text('Profile'),
                 ),
-              )
+              ),
             ],
           );
         },
         listener: (context, state) {});
+  }
+
+  Widget _home(HomeState state) {
+    return ListView.builder(
+        itemCount: state.users.length,
+        itemBuilder: (context, index) {
+          final user = state.users[index];
+          return RawMaterialButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                AppRoute.mediaDetail,
+                arguments: MediaDetailArgs(user: user),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor.withOpacity(0.4),
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatarImage(
+                      avatar: user.imagePath,
+                      size: 50,
+                    ),
+                    horizontalSpace12,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          user.title ?? '',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        verticalSpace4,
+                        Text(
+                          user.price ?? '',
+                          style: TextStyle(
+                              fontSize: 12, color: Colors.grey.shade900),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  Widget _discovery(HomeState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Expanded(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 6,
+              vertical: 10,
+            ),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+            ),
+            child: MasonryGridView.count(
+              physics: const ClampingScrollPhysics(),
+              itemCount: state.users.length,
+              crossAxisCount: 2,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+              itemBuilder: (context, index) {
+                final user = state.users[index];
+                return RawMaterialButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      AppRoute.mediaDetail,
+                      arguments: MediaDetailArgs(user: user),
+                    );
+                  },
+                  child: Hero(
+                    tag: 'logo${user.id}',
+                    child: _ImageViewer(
+                      url: user.imagePath ?? '',
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        )
+      ],
+    );
   }
 
   Widget _buildOriginDesign() {
