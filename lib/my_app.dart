@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:push_notification_fcm/core/app.dart';
 import 'package:push_notification_fcm/core/locator/locator.dart' as di;
+import 'package:push_notification_fcm/services/fcm/fcm_service.dart';
 
 import 'core/navigation/app_route.dart';
 import 'core/navigation/routes_mapper.dart';
@@ -14,9 +15,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late final FcmService _fcmService;
+
   @override
   void initState() {
     di.init(GetIt.I);
+    _fcmService = GetIt.I<FcmService>();
+    _fcmService.registryListenMessageTapped();
     super.initState();
   }
 

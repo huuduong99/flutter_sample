@@ -13,10 +13,7 @@ class FcmServiceImpl implements FcmService {
   Future<void> registryListenMessageTapped() async {
     _logger.d('FCM init');
 
-    /// handle tap notification when app in foreground
-    FirebaseMessaging.onMessage.listen(_handleMessage);
-
-    /// handle tap notification when app in background
+    /// Xử lý tin nhắn khi app ở
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
 
     _logger.d('fcmToken: ${await FirebaseMessaging.instance.getToken()}');

@@ -39,7 +39,7 @@ class BackgroundNotification {
     _logger.d('BackgroundNotification init');
   }
 
-  static Future<void> firebaseMessagingBackgroundHandler(
+  static Future<void> firebaseMessagingHandler(
       RemoteMessage message) async {
     final payload = message.data['Payload'] ?? message.data['payload'];
     if (payload != null) {
