@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     di.init(GetIt.I);
     _fcmService = GetIt.I<FcmService>();
-    _fcmService.registryListenMessageTapped();
+    _fcmService.registryListenNewNotify();
     super.initState();
   }
 

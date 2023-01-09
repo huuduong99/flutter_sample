@@ -7,7 +7,4 @@ class HomeEvent with _$HomeEvent {
 
   const factory HomeEvent.tabIndexChanged({required int index}) =
       HomeTabIndexChanged;
-
-  const factory HomeEvent.handleWithInitialFcmPayload() =
-      HomeHandleWithInitialFcmPayload;
 }

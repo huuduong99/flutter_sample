@@ -6,6 +6,7 @@ import 'package:push_notification_fcm/core/constant/spacer.dart';
 import 'package:push_notification_fcm/core/locator/locator.dart';
 import 'package:push_notification_fcm/core/navigation/app_route.dart';
 import 'package:push_notification_fcm/features/home/bloc/home_bloc.dart';
+import 'package:push_notification_fcm/services/fcm/fcm_service.dart';
 import 'package:push_notification_fcm/widgets/circle_avatar_image.dart';
 
 import '../../core/navigation/arguments/argument.dart';
@@ -19,11 +20,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeBloc _homeBloc = locator<HomeBloc>();
+  final FcmService _fcmService = locator<FcmService>();
 
   @override
   void initState() {
     _homeBloc.add(const HomeLoaded());
-    _homeBloc.add(const HomeHandleWithInitialFcmPayload());
+    _fcmService.setupInteractedMessage();
     super.initState();
   }
 
@@ -87,7 +89,8 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor.withOpacity(0.4),
                   borderRadius: const BorderRadius.all(Radius.circular(8)),

@@ -12,13 +12,11 @@ class BackgroundNotification {
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  static const String groupKey = 'group_key';
-
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
     'high_importance_channel',
-    'High Importance Notifications',
-    description: 'This channel is used for important notifications.',
-    importance: Importance.high,
+    'Thông báo nội dung',
+    description: 'Thông báo về các thay đổi của app',
+    importance: Importance.max,
   );
   static final PublishSubject<String> _eventSubjectTapped =
       PublishSubject<String>();
@@ -39,8 +37,7 @@ class BackgroundNotification {
     _logger.d('BackgroundNotification init');
   }
 
-  static Future<void> firebaseMessagingHandler(
-      RemoteMessage message) async {
+  static Future<void> firebaseMessagingHandler(RemoteMessage message) async {
     final payload = message.data['Payload'] ?? message.data['payload'];
     if (payload != null) {
       _handleShowNotification(payload);
@@ -77,23 +74,21 @@ class BackgroundNotification {
   }
 
   static Future<NotificationDetails> _notificationDetails() async {
-    const AndroidNotificationDetails androidNotificationDetails =
+    AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
-      'channel_id',
-      'channel_name',
-      channelDescription: 'description',
+      _channel.id,
+      _channel.name,
+      channelDescription: _channel.description,
       importance: Importance.max,
       priority: Priority.high,
       ticker: 'ticker',
       playSound: true,
-      groupKey: groupKey,
-      setAsGroupSummary: true,
     );
 
     const DarwinNotificationDetails iosNotificationDetails =
-        DarwinNotificationDetails(threadIdentifier: groupKey);
+        DarwinNotificationDetails();
 
-    return const NotificationDetails(
+    return NotificationDetails(
       android: androidNotificationDetails,
       iOS: iosNotificationDetails,
     );

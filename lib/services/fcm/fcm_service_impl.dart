@@ -10,13 +10,30 @@ class FcmServiceImpl implements FcmService {
   final Logger _logger = getLogger("FcmService");
 
   @override
-  Future<void> registryListenMessageTapped() async {
+  Future<void> registryListenNewNotify() async {
     _logger.d('FCM init');
 
-    /// Xử lý tin nhắn khi app ở
+    /// Nghe thông báo từ FCM khi ở foreground
+    FirebaseMessaging.onMessage
+        .listen(BackgroundNotification.firebaseMessagingHandler);
+
+    /// Nghe thông báo từ FCM khi ở background và terminated
+    FirebaseMessaging.onBackgroundMessage(
+        BackgroundNotification.firebaseMessagingHandler);
+  }
+
+  @override
+  Future<void> setupInteractedMessage() async {
+    /// Xử lý tin nhắn khi người dùng nhấn vào thông báo đẩy,khi app ở background
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
 
-    _logger.d('fcmToken: ${await FirebaseMessaging.instance.getToken()}');
+    /// Xử lý tin nhắn khi người dùng nhấn vào thông báo đẩy,khi app ở terminated
+    RemoteMessage? initialMessage =
+    await FirebaseMessaging.instance.getInitialMessage();
+
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
   }
 
   ///Xử lý tin nhắn khi nhấp vào thông báo  FCM
@@ -40,18 +57,12 @@ class FcmServiceImpl implements FcmService {
   }
 
   @override
-  Future<String?> getInitialFcmPayload() async {
-    /// handle tap notification when app terminated
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
+  Future<void> subscribeToTopic({required String topic}) async {
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
+  }
 
-    String? payload;
-
-    if (initialMessage != null) {
-      final appMessage = initialMessage.data;
-      payload = appMessage['Payload'] ?? appMessage['payload'];
-    }
-
-    return payload;
+  @override
+  Future<void> unsubscribeFromTopic({required String topic}) async {
+    await FirebaseMessaging.instance.unsubscribeFromTopic(topic);
   }
 }

@@ -17,23 +17,11 @@ Future<void> main() async {
 
   BackgroundNotification.init();
 
-  /// Nghe tin nhắn khi ở background, terminated
-  FirebaseMessaging.onBackgroundMessage(
-      BackgroundNotification.firebaseMessagingHandler);
-
-  /// Nghe tin nhắn khi ở foreground
-  FirebaseMessaging.onMessage
-      .listen(BackgroundNotification.firebaseMessagingHandler);
-
-  // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-  //   alert: true, // Required to display a heads up notification
-  //   badge: true,
-  //   sound: true,
-  // );
-  //
-  // FirebaseMessaging.onMessage.listen((message) {
-  //   print(message);
-  // });
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: false, // Required to display a heads up notification
+    badge: true,
+    sound: true,
+  );
 
   print('fcmToken: ${await FirebaseMessaging.instance.getToken()}');
 
