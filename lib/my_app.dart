@@ -1,11 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:push_notification_fcm/core/app.dart';
-import 'package:push_notification_fcm/core/locator/locator.dart' as di;
+import 'package:push_notification_fcm/injector/locator.dart' as di;
 import 'package:push_notification_fcm/services/fcm/fcm_service.dart';
 
-import 'core/navigation/app_route.dart';
-import 'core/navigation/routes_mapper.dart';
+import 'app_router/app_router.dart';
+import 'app_router/router_observer.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late final FcmService _fcmService;
+  final _appRouter = AppRouter();
 
   @override
   void initState() {
@@ -27,16 +28,17 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
-      initialRoute: AppRoute.home,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routes: RoutesMapper.buildRoute(),
-      onGenerateRoute: (RouteSettings settings) =>
-          RoutesMapper.onGenerateRoute(settings),
-      navigatorKey: App.navigatorKey,
+      routerDelegate: AutoRouterDelegate(
+        _appRouter,
+        // this should always return new instances
+        navigatorObservers: () => [RouterObserver()],
+      ),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }

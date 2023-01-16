@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import '../injector/app_injector.dart';
+import 'app_injector.dart';
 
 late GetIt _locator;
 

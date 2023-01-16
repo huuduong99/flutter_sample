@@ -3,8 +3,7 @@ part of 'booking_bloc.dart';
 @immutable
 @freezed
 class BookingEvent with _$BookingEvent {
-  const factory BookingEvent.bookingLoaded({required User user}) =
-      BookingLoaded;
+  const factory BookingEvent.bookingLoaded({required int modelId}) = BookingLoaded;
 
   const factory BookingEvent.bookingImageChanged(String imagePath) =
       BookingImageChanged;

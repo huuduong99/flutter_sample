@@ -2,7 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logger/logger.dart';
 
 import '../../background_notification.dart';
-import '../../core/logging/logging_wrapper.dart';
+import '../../common/logging/logging_wrapper.dart';
 
 import 'fcm_service.dart';
 

@@ -5,7 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'core/logging/logging_wrapper.dart';
+import 'common/logging/logging_wrapper.dart';
 import 'models/app_notification.dart';
 
 class BackgroundNotification {

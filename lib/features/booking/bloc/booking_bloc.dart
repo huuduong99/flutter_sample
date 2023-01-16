@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:push_notification_fcm/repository/user_repository.dart';
 
-
-import '../../../core/logging/logging_wrapper.dart';
+import '../../../common/logging/logging_wrapper.dart';
 import '../../../models/user.dart';
-
 
 part 'booking_bloc.freezed.dart';
 
@@ -14,7 +13,10 @@ part 'booking_event.dart';
 part 'booking_state.dart';
 
 class BookingBloc extends Bloc<BookingEvent, BookingState> {
-  BookingBloc() : super(const BookingState()) {
+  BookingBloc({
+    required UserRepository userRepository,
+  }) : super(const BookingState()) {
+    _userRepository = userRepository;
 
     on<BookingLoaded>(_onLoaded);
     on<BookingImageChanged>(_onImageChanged);
@@ -26,8 +28,8 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     on<BookingSaveButtonPressed>(_onSaveButtonPressed);
   }
 
-
   final _logger = getLogger('BookingBloc');
+  late final UserRepository _userRepository;
 
   FutureOr<void> _onLoaded(
     BookingLoaded event,
@@ -35,9 +37,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   ) async {
     emit(state.copyWith(status: BookingStatus.loading));
     try {
-
-      await Future.delayed(const Duration(seconds: 2));
-      final user = event.user;
+      final user = await _userRepository.getUserById(id: event.modelId);
 
       emit(
         state.copyWith(
@@ -45,8 +45,8 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           user: user,
         ),
       );
-      // _secureConfigService.setUserId(user.id!);
-    } catch (e) {
+    } catch (e, stack) {
+      _logger.e('BookingLoadFailure', e, stack);
       emit(
         state.copyWith(
           status: BookingStatus.loadFailed,
@@ -219,5 +219,4 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     //   _logger.e('BookingSaveFailure', e.toString(), s);
     // }
   }
-
 }

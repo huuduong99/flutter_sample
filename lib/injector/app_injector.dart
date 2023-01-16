@@ -1,7 +1,7 @@
 
 
 import 'package:get_it/get_it.dart';
-import 'package:push_notification_fcm/core/injector/service_injector.dart';
+import 'package:push_notification_fcm/injector/service_injector.dart';
 
 import 'bloc_injector.dart';
 

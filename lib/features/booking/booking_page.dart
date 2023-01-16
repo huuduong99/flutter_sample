@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/core/locator/locator.dart';
-import 'package:push_notification_fcm/models/user.dart';
+import 'package:push_notification_fcm/injector/locator.dart';
 
-import '../../core/constant/spacer.dart';
+import '../../common/constant/spacer.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/circle_avatar_image.dart';
 import 'bloc/booking_bloc.dart';
 
 class BookingPage extends StatefulWidget {
-  const BookingPage({Key? key, required this.user}) : super(key: key);
+  const BookingPage({Key? key, required this.modelId}) : super(key: key);
 
-  final User user;
+  final int modelId;
 
   @override
   State<BookingPage> createState() => _BookingPageState();
@@ -27,7 +26,7 @@ class _BookingPageState extends State<BookingPage> {
 
   @override
   void initState() {
-    _bookingBloc.add(BookingLoaded(user: widget.user));
+    _bookingBloc.add(BookingLoaded(modelId: widget.modelId));
     super.initState();
   }
 
