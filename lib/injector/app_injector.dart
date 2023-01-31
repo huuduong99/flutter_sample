@@ -1,5 +1,3 @@
-
-
 import 'package:get_it/get_it.dart';
 import 'package:push_notification_fcm/injector/service_injector.dart';
 
@@ -18,8 +16,8 @@ class CoreInjector {
   /// call to register all services needed for core to be active.
   static init(GetIt getIt) {
     _injector = getIt;
-    BLocInjector.register(getIt);
     ServiceInjector.register(getIt);
+    BLocInjector.register(getIt);
   }
 
   static reset() {

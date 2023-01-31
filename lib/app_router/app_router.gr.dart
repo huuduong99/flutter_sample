@@ -17,6 +17,18 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    SplashRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const SplashPage(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const LoginPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AdaptivePage<String>(
         routeData: routeData,
@@ -69,8 +81,16 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           '/#redirect',
           path: '/',
-          redirectTo: '/home',
+          redirectTo: '/splash',
           fullMatch: true,
+        ),
+        RouteConfig(
+          SplashRoute.name,
+          path: '/splash',
+        ),
+        RouteConfig(
+          LoginRoute.name,
+          path: '/login',
         ),
         RouteConfig(
           HomeRoute.name,
@@ -91,13 +111,6 @@ class _$AppRouter extends RootStackRouter {
               path: 'home/profile',
               parent: HomeRoute.name,
             ),
-            RouteConfig(
-              '*#redirect',
-              path: '*',
-              parent: HomeRoute.name,
-              redirectTo: 'home/newsFeed',
-              fullMatch: true,
-            ),
           ],
         ),
         RouteConfig(
@@ -115,6 +128,30 @@ class _$AppRouter extends RootStackRouter {
           fullMatch: true,
         ),
       ];
+}
+
+/// generated route for
+/// [SplashPage]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute()
+      : super(
+          SplashRoute.name,
+          path: '/splash',
+        );
+
+  static const String name = 'SplashRoute';
+}
+
+/// generated route for
+/// [LoginPage]
+class LoginRoute extends PageRouteInfo<void> {
+  const LoginRoute()
+      : super(
+          LoginRoute.name,
+          path: '/login',
+        );
+
+  static const String name = 'LoginRoute';
 }
 
 /// generated route for
