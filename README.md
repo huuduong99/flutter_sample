@@ -1,4 +1,4 @@
-# push_notification_fcm
+# flutter_sample
 
 A new Flutter project.
 
