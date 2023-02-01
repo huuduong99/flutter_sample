@@ -6,6 +6,7 @@ class ApplicationState with _$ApplicationState {
   const factory ApplicationState({
     @Default(ApplicationStatus.initial) ApplicationStatus status,
     @Default(false) isAuthenticated,
+    @Default(Locale('vi')) Locale locale,
     ApplicationHandle? applicationHandle,
   }) = _ApplicationState;
 }

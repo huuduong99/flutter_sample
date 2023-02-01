@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/app_router/app_router.dart';
-import 'package:push_notification_fcm/injector/locator.dart';
-import 'package:push_notification_fcm/features/home/bloc/home_bloc.dart';
-import 'package:push_notification_fcm/services/fcm/fcm_service.dart';
+import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/injector/locator.dart';
+import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
+import 'package:flutter_sample/services/fcm/fcm_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class _BottomBar extends StatelessWidget {
           icon: const Icon(Icons.account_circle),
         ),
       ],
-      isFloating: true,
+      isFloating: false,
     );
   }
 }

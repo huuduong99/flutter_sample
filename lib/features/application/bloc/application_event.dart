@@ -6,4 +6,5 @@ class ApplicationEvent with _$ApplicationEvent {
 
   factory ApplicationEvent.logoutRequested() = ApplicationLogoutRequested;
 
+  factory ApplicationEvent.localeChanged({required String locale}) = ApplicationLocaleChanged;
 }

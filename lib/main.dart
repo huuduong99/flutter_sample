@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'package:push_notification_fcm/widgets/reset_widget.dart';
+import 'package:flutter_sample/widgets/reset_widget.dart';
 
 import 'background_notification.dart';
 

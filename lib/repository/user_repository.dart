@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:push_notification_fcm/models/user.dart';
+import 'package:flutter_sample/models/user.dart';
 
 class UserRepository {
   final List<User> _users = const [

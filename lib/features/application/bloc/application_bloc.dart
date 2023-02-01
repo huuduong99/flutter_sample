@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -20,6 +21,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
 
     on<ApplicationLoaded>(_onApplicationLoaded);
     on<ApplicationLogoutRequested>(_onLogoutRequested);
+    on<ApplicationLocaleChanged>(_onLocaleChanged);
   }
 
   final _logger = getLogger('ApplicationBloc');
@@ -69,5 +71,16 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       );
       _logger.e('ApplicationClearServiceWhenLogoutFailure', e, stack);
     }
+  }
+
+  FutureOr<void> _onLocaleChanged(
+      ApplicationLocaleChanged event, Emitter<ApplicationState> emit) {
+    _config.setLocale(event.locale);
+
+    emit(
+      state.copyWith(
+        locale: Locale(event.locale),
+      ),
+    );
   }
 }

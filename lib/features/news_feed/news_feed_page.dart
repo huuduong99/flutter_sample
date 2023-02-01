@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/app_router/app_router.dart';
-import 'package:push_notification_fcm/features/home/bloc/home_bloc.dart';
+import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
 
 import '../../common/constant/spacer.dart';
 import '../../widgets/circle_avatar_image.dart';
@@ -39,7 +39,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor.withOpacity(0.4),
+                      color: Theme.of(context).primaryColor,
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
                     ),
                     child: Row(

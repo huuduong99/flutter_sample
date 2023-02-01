@@ -29,5 +29,14 @@ class ConfigServiceImpl implements ConfigService {
   @override
   Future<void> clear() async {
     await _box.put('accessToken', '');
+    await _box.put('locale', '');
+  }
+
+  @override
+  String get locale => _box.get('locale', defaultValue: 'vi') as String;
+
+  @override
+  Future<void> setLocale(String value) async {
+    await _box.put('locale', value);
   }
 }

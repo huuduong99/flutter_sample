@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/app_router/app_router.dart';
-import 'package:push_notification_fcm/features/application/bloc/application_bloc.dart';
+import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 
-import '../../gen/assets.gen.dart';
+import '../../generated/assets.gen.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

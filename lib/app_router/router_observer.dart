@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:push_notification_fcm/common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 
 class RouterObserver extends AutoRouterObserver {
 

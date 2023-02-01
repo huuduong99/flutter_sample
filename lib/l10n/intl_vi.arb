@@ -1,0 +1,12 @@
+{
+  "email": "Email",
+  "enterEmail": "Nhập email",
+  "password": "Mật khẩu",
+  "enterPassword": "Nhập mật khẩu",
+  "login": "Đăng nhập",
+  "booking": "Đặt lịch",
+  "logout": "Đăng xuất",
+  "language": "Ngôn ngữ",
+  "en": "Tiếng anh",
+  "vi": "Tiếng việt"
+}

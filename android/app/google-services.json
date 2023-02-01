@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "506975803166-efnoac0sm92ua39mrrpfn092cfio69s5.apps.googleusercontent.com",
+              "client_id": "506975803166-2en0aofuq8galdk8a72oknclt0khd0h8.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.pushNotificationFcm"
+                "bundle_id": "google-services.json"
               }
             }
           ]

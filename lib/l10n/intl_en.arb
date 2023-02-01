@@ -1,0 +1,12 @@
+{
+  "email": "Email",
+  "enterEmail": "Enter email",
+  "password": "Password",
+  "enterPassword": "Enter password",
+  "login": "Login",
+  "booking": "Booking",
+  "logout": "Logout",
+  "language": "Language",
+  "en": "English",
+  "vi": "Vietnamese"
+}

@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/app_router/app_router.dart';
-import 'package:push_notification_fcm/features/login/bloc/login_bloc.dart';
-import 'package:push_notification_fcm/injector/locator.dart';
-import 'package:push_notification_fcm/widgets/loading_indicator.dart';
-import 'package:push_notification_fcm/widgets/user_info_input.dart';
+import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/features/login/bloc/login_bloc.dart';
+import 'package:flutter_sample/injector/locator.dart';
+import 'package:flutter_sample/widgets/loading_indicator.dart';
+import 'package:flutter_sample/widgets/user_info_input.dart';
 
 import '../../common/constant/spacer.dart';
-import '../../gen/assets.gen.dart';
+import '../../generated/assets.gen.dart';
+import '../../generated/l10n.dart';
 import '../../widgets/app_button.dart';
 
 class LoginPage extends StatefulWidget {
@@ -52,8 +53,10 @@ class _LoginPageState extends State<LoginPage> {
           );
         },
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
-            title: const Text("Login"),
+            centerTitle: true,
+            title: Text(S.current.login),
           ),
           body: const _Body(),
         ),
@@ -67,34 +70,33 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-      return SizedBox(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                verticalSpace64,
-                _Email(),
-                verticalSpace16,
-                _Password(),
-              ],
+    final isBusy = context.select((LoginBloc bloc) => bloc.state.isBusy);
+    return SizedBox(
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              verticalSpace64,
+              _Email(),
+              verticalSpace16,
+              _Password(),
+            ],
+          ),
+          const Align(
+            alignment: Alignment.center,
+            child: SafeArea(
+              child: _LoginButton(),
             ),
-            const Align(
-              alignment: Alignment.center,
-              child: SafeArea(
-                child: _LoginButton(),
-              ),
+          ),
+          if (isBusy)
+            LoadingIndicator(
+              backgroundColor: Colors.white.withOpacity(0.4),
             ),
-            if (state.isBusy)
-              LoadingIndicator(
-                backgroundColor: Colors.white.withOpacity(0.4),
-              ),
-          ],
-        ),
-      );
-    });
+        ],
+      ),
+    );
   }
 }
 
@@ -104,11 +106,12 @@ class _Email extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (previous, current) => previous.email != current.email,
       builder: (context, state) {
         return UserInfoInput(
           initialValue: state.email,
-          title: 'Email',
-          hintText: 'Nhập email',
+          title: S.current.email,
+          hintText: S.current.enterEmail,
           enable: true,
           requiredEnterField: false,
           onValueChanged: (String email) {
@@ -137,12 +140,13 @@ class _Password extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (previous, current) => previous.password != current.password,
       builder: (context, state) {
         return UserInfoInput(
           obscureText: true,
           initialValue: state.password,
-          title: 'Password',
-          hintText: 'Nhập password',
+          title: S.current.password,
+          hintText: S.current.enterPassword,
           enable: true,
           requiredEnterField: false,
           onValueChanged: (String password) {
@@ -181,7 +185,7 @@ class _LoginButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: AppButton(
                 borderRadius: 8,
-                title: 'Login',
+                title: S.current.login,
                 titleColor: const Color(0xFFFFFFFF),
                 backgroundColor: Theme.of(context).primaryColor,
                 borderColor: Theme.of(context).primaryColor,

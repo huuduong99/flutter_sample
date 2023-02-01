@@ -1,14 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
-import 'package:push_notification_fcm/injector/locator.dart' as di;
-import 'package:push_notification_fcm/services/fcm/fcm_service.dart';
-import 'package:push_notification_fcm/widgets/reset_widget.dart';
+import 'package:flutter_sample/injector/locator.dart' as di;
+import 'package:flutter_sample/services/fcm/fcm_service.dart';
+import 'package:flutter_sample/widgets/reset_widget.dart';
 
 import 'app_router/app_router.dart';
 import 'app_router/router_observer.dart';
 import 'features/application/bloc/application_bloc.dart';
+import 'generated/l10n.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -43,25 +45,35 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider<ApplicationBloc>.value(value: _applicationBloc),
       ],
-      child: BlocListener<ApplicationBloc, ApplicationState>(
+      child: BlocConsumer<ApplicationBloc, ApplicationState>(
         listener: (context, state) {
           state.applicationHandle?.when(logout: () {
             di.locator.reset();
             RestartWidget.restartApp(context);
           });
         },
-        child: MaterialApp.router(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          routerDelegate: AutoRouterDelegate(
-            _appRouter,
-            // this should always return new instances
-            navigatorObservers: () => [RouterObserver()],
-          ),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-        ),
+        buildWhen: (previous, current) => previous.locale != current.locale,
+        builder: (context, state) {
+          return MaterialApp.router(
+            title: 'Flutter Demo',
+            locale: state.locale,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            theme: ThemeData(
+                useMaterial3: true, primaryColor: Colors.blue),
+            routerDelegate: AutoRouterDelegate(
+              _appRouter,
+              // this should always return new instances
+              navigatorObservers: () => [RouterObserver()],
+            ),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+          );
+        },
       ),
     );
   }

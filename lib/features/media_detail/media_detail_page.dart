@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/app_router/app_router.dart';
-import 'package:push_notification_fcm/features/media_detail/bloc/media_detail_bloc.dart';
-import 'package:push_notification_fcm/injector/locator.dart';
+import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
+import 'package:flutter_sample/injector/locator.dart';
 
+import '../../generated/l10n.dart';
 import '../../models/user.dart';
 import '../../widgets/app_button.dart';
+import '../../widgets/image_viewer.dart';
 
 class MediaDetailPage extends StatefulWidget {
   const MediaDetailPage({
@@ -78,20 +80,24 @@ class _ModelInfo extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
+                  height: double.infinity,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30)),
-                    image: DecorationImage(
-                      image: NetworkImage(user.imagePath ?? ''),
-                      fit: BoxFit.cover,
+                  ),
+                  child: ImageViewer(
+                    url: user.imagePath ?? '',
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
                     ),
                   ),
                 ),
                 AppBar(
                   backgroundColor: Colors.transparent,
-                  leading: const BackButton(
-                    color: Colors.white,
+                  leading: BackButton(
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
@@ -152,7 +158,7 @@ class _ModelInfo extends StatelessWidget {
                     onPressed: () {
                       context.router.push(BookingRoute(modelId: user.id!));
                     },
-                    title: 'Booking',
+                    title: S.current.booking,
                     backgroundColor: Theme.of(context).primaryColor,
                     titleColor: Colors.white,
                     borderColor: Theme.of(context).primaryColor,

@@ -28,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -48,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCrVFYtyhauTNafP_zqpvT3czVXIFgMIJI',
-    appId: '1:506975803166:android:1a4bca80154cb434ca9b0f',
+    appId: '1:506975803166:android:7a5b8a5d11112f44ca9b0f',
     messagingSenderId: '506975803166',
     projectId: 'push-notification-e17b5',
     storageBucket: 'push-notification-e17b5.appspot.com',
@@ -56,23 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBTXBd3MVdfd6_VaZCDoISCGcSVFZVCWAE',
-    appId: '1:506975803166:ios:2d585ae4a2f2058aca9b0f',
+    appId: '1:506975803166:ios:d90603ee574345c2ca9b0f',
     messagingSenderId: '506975803166',
     projectId: 'push-notification-e17b5',
     storageBucket: 'push-notification-e17b5.appspot.com',
-    androidClientId: '506975803166-lj1ujah77p7hs7j5sn2pq1j9s0b9e9j6.apps.googleusercontent.com',
-    iosClientId: '506975803166-efnoac0sm92ua39mrrpfn092cfio69s5.apps.googleusercontent.com',
-    iosBundleId: 'com.example.pushNotificationFcm',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBTXBd3MVdfd6_VaZCDoISCGcSVFZVCWAE',
-    appId: '1:506975803166:ios:2d585ae4a2f2058aca9b0f',
-    messagingSenderId: '506975803166',
-    projectId: 'push-notification-e17b5',
-    storageBucket: 'push-notification-e17b5.appspot.com',
-    androidClientId: '506975803166-lj1ujah77p7hs7j5sn2pq1j9s0b9e9j6.apps.googleusercontent.com',
-    iosClientId: '506975803166-efnoac0sm92ua39mrrpfn092cfio69s5.apps.googleusercontent.com',
-    iosBundleId: 'com.example.pushNotificationFcm',
+    androidClientId: '506975803166-0oaarf6fj1skujhv81ma2g3keamspbmq.apps.googleusercontent.com',
+    iosClientId: '506975803166-i47ia8o3rphrln4m8seg06sspqlg4k17.apps.googleusercontent.com',
+    iosBundleId: 'com.example.flutterSample',
   );
 }

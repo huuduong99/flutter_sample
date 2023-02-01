@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
-import 'package:push_notification_fcm/features/application/bloc/application_bloc.dart';
-import 'package:push_notification_fcm/features/booking/bloc/booking_bloc.dart';
-import 'package:push_notification_fcm/features/media_detail/bloc/media_detail_bloc.dart';
-import 'package:push_notification_fcm/repository/user_repository.dart';
+import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
+import 'package:flutter_sample/features/booking/bloc/booking_bloc.dart';
+import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
+import 'package:flutter_sample/repository/user_repository.dart';
 
 import '../../features/home/bloc/home_bloc.dart';
 import '../features/login/bloc/login_bloc.dart';

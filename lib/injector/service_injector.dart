@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:push_notification_fcm/services/config_service/config_service.dart';
-import 'package:push_notification_fcm/services/config_service/config_service_impl.dart';
+import 'package:flutter_sample/services/config_service/config_service.dart';
+import 'package:flutter_sample/services/config_service/config_service_impl.dart';
 
 import '../../services/fcm/fcm_service.dart';
 import '../../services/fcm/fcm_service_impl.dart';

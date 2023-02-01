@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:push_notification_fcm/injector/locator.dart';
+import 'package:flutter_sample/injector/locator.dart';
 
 import '../../common/constant/spacer.dart';
 import '../../widgets/app_button.dart';

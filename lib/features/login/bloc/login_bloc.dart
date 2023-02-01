@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:push_notification_fcm/common/helpers/string_hepler.dart';
+import 'package:flutter_sample/common/helpers/string_hepler.dart';
 import '../../../common/logging/logging_wrapper.dart';
 import '../../../services/config_service/config_service.dart';
 
