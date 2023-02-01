@@ -56,6 +56,12 @@ class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    SettingRoute.name: (routeData) {
+      return AdaptivePage<dynamic>(
+        routeData: routeData,
+        child: const SettingPage(),
+      );
+    },
     NewsFeedRoute.name: (routeData) {
       return AdaptivePage<dynamic>(
         routeData: routeData,
@@ -120,6 +126,10 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(
           BookingRoute.name,
           path: '/booking',
+        ),
+        RouteConfig(
+          SettingRoute.name,
+          path: '/settings',
         ),
         RouteConfig(
           '*#redirect',
@@ -238,6 +248,18 @@ class BookingRouteArgs {
   String toString() {
     return 'BookingRouteArgs{key: $key, modelId: $modelId}';
   }
+}
+
+/// generated route for
+/// [SettingPage]
+class SettingRoute extends PageRouteInfo<void> {
+  const SettingRoute()
+      : super(
+          SettingRoute.name,
+          path: '/settings',
+        );
+
+  static const String name = 'SettingRoute';
 }
 
 /// generated route for

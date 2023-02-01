@@ -8,5 +8,14 @@
   "logout": "Logout",
   "language": "Language",
   "en": "English",
-  "vi": "Vietnamese"
+  "vi": "Vietnamese",
+  "chooseLanguage": "Choose language",
+  "settings": "Settings",
+  "memberVipOf": "Member VIP of",
+  "userInfo": "User info",
+  "userInfoDescription": "Email, phone, address ...",
+  "settingsDescription": "Language, notification ...",
+  "emailInvalid": "Invalid email",
+  "pleaseEnterPassword": "Please enter your password",
+  "invalidData": "Invalid data"
 }

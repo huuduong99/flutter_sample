@@ -29,7 +29,6 @@ class ConfigServiceImpl implements ConfigService {
   @override
   Future<void> clear() async {
     await _box.put('accessToken', '');
-    await _box.put('locale', '');
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -40,20 +39,26 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
     try {
       await _config.init();
 
-      /// check authentication status.
+      /// Check authentication status.
       bool isAuthenticated = _config.accessToken.isNotEmpty;
 
-      emit(state.copyWith(
-        status: ApplicationStatus.startSuccess,
-        isAuthenticated: isAuthenticated,
-      ));
-    } catch (e, s) {
+      /// Load locale.
+      String locale = _config.locale;
+
       emit(
-        const ApplicationState(
+        state.copyWith(
+          status: ApplicationStatus.startSuccess,
+          isAuthenticated: isAuthenticated,
+          locale: locale,
+        ),
+      );
+    } catch (e, s) {
+      _logger.e('ApplicationLoadFailure', e, s);
+      emit(
+        state.copyWith(
           status: ApplicationStatus.startFailure,
         ),
       );
-      _logger.e('on application started failed', e, s);
     }
   }
 
@@ -69,18 +74,31 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       emit(
         state.copyWith(applicationHandle: ApplicationHandle.logout()),
       );
-      _logger.e('ApplicationClearServiceWhenLogoutFailure', e, stack);
+      _logger.e('ApplicationLogoutRequestFailure', e, stack);
     }
   }
 
   FutureOr<void> _onLocaleChanged(
-      ApplicationLocaleChanged event, Emitter<ApplicationState> emit) {
-    _config.setLocale(event.locale);
+      ApplicationLocaleChanged event, Emitter<ApplicationState> emit) async {
+    if (state.locale == event.locale) {
+      return;
+    }
 
-    emit(
-      state.copyWith(
-        locale: Locale(event.locale),
-      ),
-    );
+    try {
+      await _config.setLocale(event.locale);
+
+      emit(
+        state.copyWith(
+          locale: event.locale,
+        ),
+      );
+    } catch (e, s) {
+      _logger.e('ApplicationLoadFailure', e, s);
+      emit(
+        state.copyWith(
+          status: ApplicationStatus.startFailure,
+        ),
+      );
+    }
   }
 }

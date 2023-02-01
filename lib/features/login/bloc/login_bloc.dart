@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/common/helpers/string_hepler.dart';
 import '../../../common/logging/logging_wrapper.dart';
+import '../../../generated/l10n.dart';
 import '../../../services/config_service/config_service.dart';
 
 part 'login_bloc.freezed.dart';
@@ -33,7 +34,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     String? errorEmail;
     if (!emailIsValid) {
       if (!event.email.isEmail) {
-        errorEmail = 'Email không hợp lệ';
+        errorEmail = S.current.emailInvalid;
       }
     }
 
@@ -50,7 +51,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     if (!passwordIsValid) {
       if (event.password.trim().isEmpty) {
-        errorPassword = 'Vui lòng nhập mật khẩu';
+        errorPassword = S.current.pleaseEnterPassword;
       }
     }
 
@@ -70,14 +71,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (!event.email.isEmail) {
       emit(
         state.copyWith(
-          errorEmail: 'Email không hợp lệ',
+          errorEmail: S.current.emailInvalid,
         ),
       );
       isValid = false;
     }
 
     if (event.password.trim().isEmpty) {
-      emit(state.copyWith(errorPassword: 'Vui lòng nhập mật khẩu'));
+      emit(state.copyWith(
+        errorPassword: S.current.pleaseEnterPassword,
+      ));
       isValid = false;
     }
 
@@ -98,12 +101,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ),
       );
     } else {
-      _logger.e('Bạn chưa nhập đầy đủ dữ liệu');
+      _logger.e(S.current.invalidData);
       emit(
         state.copyWith(
           isBusy: false,
           loginHandle: LoginHandle.loginFailure(
-            message: 'Bạn chưa nhập đầy đủ dữ liệu',
+            message: S.current.invalidData,
           ),
         ),
       );

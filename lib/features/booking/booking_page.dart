@@ -67,52 +67,6 @@ class _BookingPageState extends State<BookingPage> {
     );
   }
 
-  void _handleCancelEdit() {
-    showDialog(
-      context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          title: const Text('Thay đổi chỉnh sửa'),
-          content: const Text(
-            'Bạn có chắc chắn muốn hủy bỏ chỉnh sửa thông tin này không?',
-          ),
-          actions: <Widget>[
-            SizedBox(
-              width: 110,
-              child: AppButton(
-                borderRadius: 6,
-                title: 'Hủy',
-                borderColor: const Color(0xFFE2E7ED),
-                titleColor: const Color(0xFF2C333A),
-                onPressed: () {
-                  Navigator.pop(dialogContext);
-                },
-              ),
-            ),
-            SizedBox(
-              width: 110,
-              child: AppButton(
-                borderRadius: 6,
-                backgroundColor: const Color(0xFFEF592E),
-                title: 'Confirm',
-                onPressed: () {
-                  Navigator.pop(dialogContext);
-                  context
-                      .read<BookingBloc>()
-                      .add(const BookingCancelAllChanged());
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   Widget _buildBody() {
     return GestureDetector(
       onTap: () {

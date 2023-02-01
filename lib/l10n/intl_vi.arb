@@ -8,5 +8,14 @@
   "logout": "Đăng xuất",
   "language": "Ngôn ngữ",
   "en": "Tiếng anh",
-  "vi": "Tiếng việt"
+  "vi": "Tiếng việt",
+  "chooseLanguage": "Chọn ngôn ngữ",
+  "settings": "Cài đặt",
+  "memberVipOf": "Thành viên VIP của",
+  "userInfo": "Thông tin",
+  "userInfoDescription": "Email, SĐT, địa chỉ...",
+  "settingsDescription": "Ngôn ngữ , thông báo ...",
+  "emailInvalid": "Email không hợp lệ",
+  "pleaseEnterPassword": "Vui lòng nhập mật khẩu",
+  "invalidData": "Bạn chưa nhập đầy đủ dữ liệu"
 }

@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             centerTitle: true,
-            title: Text(S.current.login),
+            title: Text(S.of(context).login),
           ),
           body: const _Body(),
         ),
@@ -110,8 +110,8 @@ class _Email extends StatelessWidget {
       builder: (context, state) {
         return UserInfoInput(
           initialValue: state.email,
-          title: S.current.email,
-          hintText: S.current.enterEmail,
+          title: S.of(context).email,
+          hintText: S.of(context).enterEmail,
           enable: true,
           requiredEnterField: false,
           onValueChanged: (String email) {
@@ -145,8 +145,8 @@ class _Password extends StatelessWidget {
         return UserInfoInput(
           obscureText: true,
           initialValue: state.password,
-          title: S.current.password,
-          hintText: S.current.enterPassword,
+          title: S.of(context).password,
+          hintText: S.of(context).enterPassword,
           enable: true,
           requiredEnterField: false,
           onValueChanged: (String password) {
@@ -185,7 +185,7 @@ class _LoginButton extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: AppButton(
                 borderRadius: 8,
-                title: S.current.login,
+                title: S.of(context).login,
                 titleColor: const Color(0xFFFFFFFF),
                 backgroundColor: Theme.of(context).primaryColor,
                 borderColor: Theme.of(context).primaryColor,

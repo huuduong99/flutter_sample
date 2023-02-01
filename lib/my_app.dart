@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, state) {
           return MaterialApp.router(
             title: 'Flutter Demo',
-            locale: state.locale,
+            locale: Locale(state.locale),
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -64,8 +64,7 @@ class _MyAppState extends State<MyApp> {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: S.delegate.supportedLocales,
-            theme: ThemeData(
-                useMaterial3: true, primaryColor: Colors.blue),
+            theme: ThemeData(useMaterial3: true, primaryColor: Colors.blue),
             routerDelegate: AutoRouterDelegate(
               _appRouter,
               // this should always return new instances

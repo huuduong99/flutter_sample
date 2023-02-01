@@ -8,6 +8,7 @@ import 'package:flutter_sample/features/home/home_page.dart';
 import 'package:flutter_sample/features/media_detail/media_detail_page.dart';
 import 'package:flutter_sample/features/news_feed/news_feed_page.dart';
 import 'package:flutter_sample/features/profile/profile_page.dart';
+import 'package:flutter_sample/features/settings/settings_page.dart';
 
 import '../features/login/login_page.dart';
 
@@ -50,6 +51,10 @@ part 'app_router.gr.dart';
     AutoRoute(
       path: Routes.booking,
       page: BookingPage,
+    ),
+    AutoRoute(
+      path: Routes.settings,
+      page: SettingPage,
     ),
     RedirectRoute(path: '*', redirectTo: Routes.home),
   ],

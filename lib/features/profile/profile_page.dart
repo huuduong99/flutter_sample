@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 import 'package:flutter_sample/generated/assets.gen.dart';
 import 'package:flutter_sample/widgets/app_button.dart';
 
+import '../../app_router/routes.dart';
 import '../../common/constant/spacer.dart';
 import '../../generated/l10n.dart';
 import '../../widgets/border_circle_avatar_image.dart';
@@ -68,8 +70,6 @@ class _Body extends StatelessWidget {
                 verticalSpace12,
                 _UserCard(),
                 verticalSpace12,
-                _HelpFeedbackCard(),
-                verticalSpace12,
                 _SettingsCard(),
               ],
             ),
@@ -132,9 +132,9 @@ class _UserInfo extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              const TextSpan(
-                text: 'Thành viên VIP của ',
-                style: TextStyle(color: Color(0xff2C333A), fontSize: 14),
+              TextSpan(
+                text: '${S.of(context).memberVipOf} ',
+                style: const TextStyle(color: Color(0xff2C333A), fontSize: 14),
               ),
               TextSpan(
                 text: 'Booking App',
@@ -155,24 +155,10 @@ class _UserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _MenuItem(
-      title: 'Thông tin ',
+      title: S.of(context).userInfo,
       onPressed: () {},
       icon: Assets.icons.userIcon.svg(),
-      content: 'Email, SĐT, địa chỉ...',
-    );
-  }
-}
-
-class _HelpFeedbackCard extends StatelessWidget {
-  const _HelpFeedbackCard({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _MenuItem(
-      title: 'Trợ giúp & phản hồi',
-      onPressed: () async {},
-      icon: Assets.icons.infoIcon.svg(),
-      content: 'Đánh giá, Điều khoản sử dụng, Báo cáo vi phạm',
+      content: S.of(context).userInfoDescription,
     );
   }
 }
@@ -183,10 +169,12 @@ class _SettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _MenuItem(
-      title: 'Cấu hình',
-      onPressed: () {},
+      title: S.of(context).settings,
+      onPressed: () {
+        context.router.pushNamed(Routes.settings);
+      },
       icon: Assets.icons.icSetting.svg(),
-      content: 'Ngôn ngữ , thông báo...',
+      content: S.of(context).settingsDescription,
     );
   }
 }
@@ -204,7 +192,7 @@ class _LogoutButton extends StatelessWidget {
           borderRadius: 8,
           backgroundColor: Theme.of(context).primaryColor,
           borderColor: Theme.of(context).primaryColor,
-          title: S.current.logout,
+          title: S.of(context).logout,
           onPressed: () {
             context
                 .read<ApplicationBloc>()

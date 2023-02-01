@@ -7,4 +7,5 @@ class Routes {
   static const String profile = "home/profile";
   static const String mediaDetail = "/mediaDetail";
   static const String booking = "/booking";
+  static const String settings = "/settings";
 }
