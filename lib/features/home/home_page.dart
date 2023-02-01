@@ -88,29 +88,40 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationBar(
-      iconSize: 30.0,
-      selectedColor: Theme.of(context).primaryColor,
-      strokeColor: Theme.of(context).primaryColor,
-      unSelectedColor: Colors.grey[600],
-      backgroundColor: Colors.white,
-      borderRadius: const Radius.circular(20.0),
-      blurEffect: false,
-      scaleCurve: Curves.bounceIn,
-      currentIndex: tabsRouter.activeIndex,
-      onTap: tabsRouter.setActiveIndex,
-      items: [
-        CustomNavigationBarItem(
-          icon: const Icon(Icons.home),
-        ),
-        CustomNavigationBarItem(
-          icon: const Icon(Icons.travel_explore),
-        ),
-        CustomNavigationBarItem(
-          icon: const Icon(Icons.account_circle),
-        ),
-      ],
-      isFloating: false,
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey,
+              blurRadius: 11,
+              spreadRadius: 0,
+              offset: Offset(0, -4))
+        ],
+      ),
+      child: CustomNavigationBar(
+        iconSize: 30.0,
+        selectedColor: Theme.of(context).primaryColor,
+        strokeColor: Theme.of(context).primaryColor,
+        unSelectedColor: Colors.grey[600],
+        backgroundColor: Colors.white,
+        borderRadius: const Radius.circular(20.0),
+        blurEffect: false,
+        scaleCurve: Curves.bounceIn,
+        currentIndex: tabsRouter.activeIndex,
+        onTap: tabsRouter.setActiveIndex,
+        items: [
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.home),
+          ),
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.travel_explore),
+          ),
+          CustomNavigationBarItem(
+            icon: const Icon(Icons.account_circle),
+          ),
+        ],
+        isFloating: false,
+      ),
     );
   }
 }
