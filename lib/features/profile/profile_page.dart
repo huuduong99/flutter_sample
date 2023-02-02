@@ -86,28 +86,33 @@ class _UserPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: const [0.55, 0.45],
-          colors: [Theme.of(context).primaryColor, Colors.white],
-        ),
-      ),
-      alignment: Alignment.center,
-      child: const BorderCircleAvatarImage(
-        size: 120,
-        avatar:
-            'https://khoinguonsangtao.vn/wp-content/uploads/2022/08/hinh-nen-gai-xinh.jpg',
-        borderSide: 4,
-        name: 'Dương Nguyễn',
-        style: TextStyle(
-          color: Colors.blue,
-          fontWeight: FontWeight.w600,
-          fontSize: 30,
-        ),
-      ),
+    return BlocBuilder<ApplicationBloc, ApplicationState>(
+      buildWhen: (prev, current) => prev.user != current.user,
+      builder: (context, state) {
+        final user = state.user;
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: const [0.55, 0.45],
+              colors: [Theme.of(context).primaryColor, Colors.white],
+            ),
+          ),
+          alignment: Alignment.center,
+          child: BorderCircleAvatarImage(
+            size: 120,
+            avatar: user.imagePath ?? '',
+            borderSide: 4,
+            name: user.name ?? '',
+            style: const TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.w600,
+              fontSize: 30,
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -117,34 +122,41 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Text(
-          'Dương Nguyễn',
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              color: Color(0xff000000),
-              fontSize: 27,
-              fontWeight: FontWeight.w600),
-        ),
-        verticalSpace4,
-        Text.rich(
-          TextSpan(
-            children: [
+    return BlocBuilder<ApplicationBloc, ApplicationState>(
+      buildWhen: (prev, current) => prev.user != current.user,
+      builder: (context, state) {
+        final user = state.user;
+        return Column(
+          children: [
+            Text(
+              user.name ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                  color: Color(0xff000000),
+                  fontSize: 27,
+                  fontWeight: FontWeight.w600),
+            ),
+            verticalSpace4,
+            Text.rich(
               TextSpan(
-                text: '${S.of(context).memberVipOf} ',
-                style: const TextStyle(color: Color(0xff2C333A), fontSize: 14),
+                children: [
+                  TextSpan(
+                    text: '${S.of(context).memberVipOf} ',
+                    style:
+                        const TextStyle(color: Color(0xff2C333A), fontSize: 14),
+                  ),
+                  TextSpan(
+                    text: 'Booking App',
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 14),
+                  ),
+                ],
               ),
-              TextSpan(
-                text: 'Booking App',
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor, fontSize: 14),
-              ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 }

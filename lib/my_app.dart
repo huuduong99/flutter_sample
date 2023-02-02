@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -52,7 +53,9 @@ class _MyAppState extends State<MyApp> {
             RestartWidget.restartApp(context);
           });
         },
-        buildWhen: (previous, current) => previous.locale != current.locale,
+        buildWhen: (previous, current) =>
+            previous.locale != current.locale ||
+            previous.isDarkMode != current.isDarkMode,
         builder: (context, state) {
           return MaterialApp.router(
             title: 'Flutter Demo',
@@ -64,7 +67,9 @@ class _MyAppState extends State<MyApp> {
               GlobalCupertinoLocalizations.delegate,
             ],
             supportedLocales: S.delegate.supportedLocales,
-            theme: ThemeData(useMaterial3: true, primaryColor: Colors.blue),
+            theme: FlexThemeData.light(scheme: FlexScheme.blue),
+            darkTheme: FlexThemeData.dark(scheme: FlexScheme.blueWhale),
+            themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
             routerDelegate: AutoRouterDelegate(
               _appRouter,
               // this should always return new instances

@@ -9,5 +9,9 @@ abstract class ConfigService {
 
   Future<void> setLocale(String value);
 
+  bool get isDarkMode;
+
+  Future<void> setIsDarkMode(bool value);
+
   Future<void> clear();
 }

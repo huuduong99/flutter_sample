@@ -11,7 +11,7 @@ class User with _$User {
     String? imagePath,
     String? price,
     String? photographer,
-    String? title,
+    String? name,
     String? details,
   }) = _User;
 

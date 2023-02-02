@@ -327,7 +327,7 @@ class _BookingPageState extends State<BookingPage> {
     return CircleAvatarImage(
       size: 120,
       avatar: state.user.imagePath,
-      name: state.user.title ?? '',
+      name: state.user.name ?? '',
       style: const TextStyle(
         color: Colors.blue,
         fontWeight: FontWeight.w600,

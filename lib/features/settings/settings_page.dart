@@ -51,21 +51,45 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _SettingsItem(
-      settings: Settings(
-        title: S.of(context).language,
-        content: Localizations.localeOf(context).languageCode.localeName,
-        onPressed: () {
-          final List<Locale> locales = S.delegate.supportedLocales.toList();
-          locales.sort((a, b) => b.languageCode.compareTo(a.languageCode));
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return _buildLanguageSelectBottomSheet(context, locales);
+    return Column(
+      children: [
+        _SettingsItem(
+          settings: Settings(
+            title: S.of(context).language,
+            content: Localizations.localeOf(context).languageCode.localeName,
+            onPressed: () {
+              final List<Locale> locales = S.delegate.supportedLocales.toList();
+              locales.sort((a, b) => b.languageCode.compareTo(a.languageCode));
+              showModalBottomSheet<void>(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
+                ),
+                builder: (BuildContext context) {
+                  return _buildLanguageSelectBottomSheet(context, locales);
+                },
+              );
             },
-          );
-        },
-      ),
+          ),
+        ),
+        BlocBuilder<ApplicationBloc, ApplicationState>(
+          buildWhen: (previous, current) =>
+              previous.isDarkMode != current.isDarkMode,
+          builder: (context, state) {
+            return _SwitchItem(
+              initValue: state.isDarkMode,
+              title: 'Dark mode',
+              onChanged: (bool value) {
+                context.read<ApplicationBloc>().add(
+                      ApplicationEvent.themeChanged(isDarkMode: value),
+                    );
+              },
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -80,7 +104,6 @@ class _Body extends StatelessWidget {
           child: Column(
             children: <Widget>[
               const _AppBarBottomSheet(),
-              const Divider(),
               ...locales
                   .map((locale) => _LocalItem(
                         locale: locale,
@@ -100,21 +123,16 @@ class _AppBarBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.transparent,
-      leading: ClipOval(
-        child: Material(
-          child: IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () {
-              context.router.pop();
-            },
-          ),
-        ),
+      leading: IconButton(
+        icon: const Icon(Icons.close),
+        onPressed: () {
+          context.router.pop();
+        },
       ),
       title: Text(S.of(context).chooseLanguage),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(30),
+          top: Radius.circular(30),
         ),
       ),
     );
@@ -136,6 +154,9 @@ class _LocalItem extends StatelessWidget {
       builder: (context, state) {
         return Ink(
           child: ListTile(
+            shape: const Border(
+              bottom: BorderSide(color: Color(0xFFF0F1F3), width: 1),
+            ),
             onTap: () async {
               context.read<ApplicationBloc>().add(
                     ApplicationEvent.localeChanged(locale: locale.languageCode),
@@ -168,21 +189,27 @@ class _SettingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: Color(0xFFF0F1F3),
+            width: 1,
+          ),
+        ),
+      ),
       height: 56,
       child: Ink(
         child: InkWell(
           onTap: settings.onPressed,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(settings.title,
-                    style: Theme.of(context).textTheme.bodyText1),
-                buildNavigateButton(settings.content, context)
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(settings.title,
+                  style: Theme.of(context).textTheme.bodyText1),
+              buildNavigateButton(settings.content, context)
+            ],
           ),
         ),
       ),
@@ -203,6 +230,40 @@ class _SettingsItem extends StatelessWidget {
           size: 12,
         )
       ],
+    );
+  }
+}
+
+class _SwitchItem extends StatelessWidget {
+  const _SwitchItem({
+    Key? key,
+    required this.initValue,
+    required this.title,
+    required this.onChanged,
+  }) : super(key: key);
+
+  final bool initValue;
+  final String title;
+  final ValueChanged<bool> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: SwitchListTile.adaptive(
+          activeColor: Theme.of(context).primaryColor,
+          contentPadding: EdgeInsets.zero,
+          shape: const Border(
+            bottom: BorderSide(color: Color(0xFFF0F1F3), width: 1),
+          ),
+          title: Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          value: initValue,
+          onChanged: onChanged),
     );
   }
 }

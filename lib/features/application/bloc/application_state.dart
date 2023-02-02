@@ -8,6 +8,8 @@ class ApplicationState with _$ApplicationState {
     @Default(false) isAuthenticated,
     @Default('vi') String locale,
     ApplicationHandle? applicationHandle,
+    @Default(false) isDarkMode,
+    @Default(User()) User user,
   }) = _ApplicationState;
 }
 

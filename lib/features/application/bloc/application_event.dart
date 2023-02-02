@@ -6,5 +6,9 @@ class ApplicationEvent with _$ApplicationEvent {
 
   factory ApplicationEvent.logoutRequested() = ApplicationLogoutRequested;
 
-  factory ApplicationEvent.localeChanged({required String locale}) = ApplicationLocaleChanged;
+  factory ApplicationEvent.localeChanged({required String locale}) =
+      ApplicationLocaleChanged;
+
+  factory ApplicationEvent.themeChanged({required bool isDarkMode}) =
+      ApplicationThemeChanged;
 }

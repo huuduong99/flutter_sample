@@ -117,7 +117,7 @@ class _ModelInfo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        user.title ?? '',
+                        user.name ?? '',
                         style: const TextStyle(
                           color: Colors.redAccent,
                           fontSize: 22,

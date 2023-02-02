@@ -38,4 +38,12 @@ class ConfigServiceImpl implements ConfigService {
   Future<void> setLocale(String value) async {
     await _box.put('locale', value);
   }
+
+  @override
+  bool get isDarkMode => _box.get('isDarkMode', defaultValue: false) as bool;
+
+  @override
+  Future<void> setIsDarkMode(bool value) async {
+    await _box.put('isDarkMode', value);
+  }
 }
