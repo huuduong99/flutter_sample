@@ -29,7 +29,7 @@ class FcmServiceImpl implements FcmService {
 
     /// Xử lý tin nhắn khi người dùng nhấn vào thông báo đẩy,khi app ở terminated
     RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
+        await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
       _handleMessage(initialMessage);

@@ -4,7 +4,6 @@ import 'package:logger/logger.dart';
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 
 class RouterObserver extends AutoRouterObserver {
-
   final Logger _logger = getLogger('RouterObserver');
   @override
   void didPush(Route route, Route? previousRoute) {
@@ -21,5 +20,4 @@ class RouterObserver extends AutoRouterObserver {
   void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
     _logger.d('Tab route re-visited: ${route.name}');
   }
-
 }

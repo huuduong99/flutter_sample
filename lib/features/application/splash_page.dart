@@ -14,12 +14,12 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   @override
   void initState() {
     context.read<ApplicationBloc>().add(ApplicationEvent.loaded());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ApplicationBloc, ApplicationState>(
