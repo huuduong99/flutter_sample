@@ -87,10 +87,10 @@ class ConsoleOutput extends LogOutput {
             ? SimplePrettyPrinter.levelColors[event.level]!(ct)
             : ct;
         if (f.isNotEmpty) {
-          print(content);
+          debugPrint(content);
         }
 
-        kDebugMode ? debugPrint(f) : print(f);
+        debugPrint(f);
       }
     }
   }
