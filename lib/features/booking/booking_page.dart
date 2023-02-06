@@ -41,7 +41,6 @@ class _BookingPageState extends State<BookingPage> {
         value: _bookingBloc,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white,
           appBar: _buildAppbar(),
           body: _buildBody(),
         ),

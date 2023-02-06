@@ -31,7 +31,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
       appBar: _AppBar(),
       body: _Body(),
     );
@@ -87,16 +86,21 @@ class _UserPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ApplicationBloc, ApplicationState>(
-      buildWhen: (prev, current) => prev.user != current.user,
+      buildWhen: (prev, current) =>
+          prev.user != current.user || prev.isDarkMode != current.isDarkMode,
       builder: (context, state) {
         final user = state.user;
+        final isDarkMode = state.isDarkMode;
         return Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               stops: const [0.55, 0.45],
-              colors: [Theme.of(context).primaryColor, Colors.white],
+              colors: [
+                Theme.of(context).primaryColor,
+                isDarkMode ? Colors.black12 : Colors.white
+              ],
             ),
           ),
           alignment: Alignment.center,
@@ -132,10 +136,7 @@ class _UserInfo extends StatelessWidget {
               user.name ?? '',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                  color: Color(0xff000000),
-                  fontSize: 27,
-                  fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 27, fontWeight: FontWeight.w600),
             ),
             verticalSpace4,
             Text.rich(
@@ -143,8 +144,7 @@ class _UserInfo extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: '${S.of(context).memberVipOf} ',
-                    style:
-                        const TextStyle(color: Color(0xff2C333A), fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                   ),
                   TextSpan(
                     text: 'Booking App',

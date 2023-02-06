@@ -188,26 +188,32 @@ class _SettingsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Color(0xFFF0F1F3),
-            width: 1,
+    return Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Color(0xFFF0F1F3),
+              width: 1,
+            ),
           ),
         ),
-      ),
-      height: 56,
-      child: Ink(
-        child: InkWell(
-          onTap: settings.onPressed,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(settings.title),
-              buildNavigateButton(settings.content, context)
-            ],
+        height: 56,
+        child: Ink(
+          child: InkWell(
+            onTap: settings.onPressed,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  settings.title,
+                  style:
+                      const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                ),
+                buildNavigateButton(settings.content, context)
+              ],
+            ),
           ),
         ),
       ),
@@ -256,9 +262,7 @@ class _SwitchItem extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
           ),
           value: initValue,
           onChanged: onChanged),
