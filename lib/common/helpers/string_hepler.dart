@@ -11,7 +11,7 @@ extension StringExtensions on String {
 
   /// Indicates whether a string is a phone number or not.
   bool get isPhoneNumber => RegExp(phoneNumberPattern)
-      .hasMatch((length == 9 && !startsWith('0')) ? '0${this}' : this);
+      .hasMatch((length == 9 && !startsWith('0')) ? '0$this' : this);
 
   bool get isVideoURL => RegExp(videoPattern).hasMatch(this);
 
