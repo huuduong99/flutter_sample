@@ -173,7 +173,6 @@ class _LocalItem extends StatelessWidget {
                 : null,
             title: Text(
               locale.languageCode.localeName,
-              style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
         );
@@ -206,8 +205,7 @@ class _SettingsItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(settings.title,
-                  style: Theme.of(context).textTheme.bodyText1),
+              Text(settings.title),
               buildNavigateButton(settings.content, context)
             ],
           ),
