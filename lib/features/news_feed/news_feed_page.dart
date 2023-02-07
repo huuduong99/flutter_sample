@@ -63,9 +63,6 @@ class _Header extends StatelessWidget {
       buildWhen: (prev, current) => prev.user != current.user,
       builder: (context, state) {
         return ListTile(
-          shape: const Border(
-            bottom: BorderSide(color: Color(0xFFF0F1F3), width: 6),
-          ),
           leading: CircleAvatarImage(
             size: 56,
             avatar: state.user.imagePath ?? '',
@@ -74,7 +71,6 @@ class _Header extends StatelessWidget {
           title: Text(
             state.user.name ?? '',
             style: const TextStyle(
-                color: Color(0xFF2C333A),
                 fontSize: 18,
                 fontWeight: FontWeight.w600),
           ),

@@ -74,17 +74,35 @@ class UserInfoInput extends StatelessWidget {
               errorMaxLines: 2,
               errorStyle: const TextStyle(color: Colors.redAccent),
               isDense: true,
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               enabledBorder: errorMessage != null
                   ? const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent))
+                      borderSide: BorderSide(color: Colors.redAccent),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(999),
+                      ),
+                    )
                   : const OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffE2E7ED))),
+                      borderSide: BorderSide(
+                        color: Color(0xffE2E7ED),
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(999),
+                      ),
+                    ),
               focusedBorder: errorMessage != null
                   ? const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent))
+                      borderSide: BorderSide(color: Colors.redAccent),
+                    )
                   : const OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xff3777F3))),
+                      borderSide: BorderSide(
+                        color: Color(0xff3777F3),
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(999),
+                      ),
+                    ),
             ),
             style: const TextStyle(
                 color: Color(0xFF2C333A),

@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 
 import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
 import 'package:flutter_sample/services/fcm/fcm_service.dart';
@@ -30,8 +32,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocProvider<HomeBloc>.value(
       value: _homeBloc,
-      child: const Scaffold(
-        body: _Body(),
+      child: BlocBuilder<ApplicationBloc, ApplicationState>(
+        buildWhen: (previous, current) =>
+            previous.isDarkMode != current.isDarkMode,
+        builder: (context, state) {
+          return AnnotatedRegion<SystemUiOverlayStyle>(
+            value: state.isDarkMode
+                ? SystemUiOverlayStyle.light
+                : SystemUiOverlayStyle.dark,
+            child: const Scaffold(
+              body: _Body(),
+            ),
+          );
+        },
       ),
     );
   }
@@ -94,7 +107,6 @@ class _BottomBar extends StatelessWidget {
       selectedItemColor: Theme.of(context).primaryColor,
       unselectedItemColor: Colors.grey[600],
       showUnselectedLabels: false,
-      backgroundColor: Colors.white,
       currentIndex: tabsRouter.activeIndex,
       onTap: tabsRouter.setActiveIndex,
       items: const [

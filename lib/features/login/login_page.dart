@@ -73,21 +73,31 @@ class _Body extends StatelessWidget {
     final isBusy = context.select((LoginBloc bloc) => bloc.state.isBusy);
     return SizedBox(
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
-              verticalSpace64,
-              _Email(),
-              verticalSpace16,
-              _Password(),
-            ],
+          SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                verticalSpace64,
+                Assets.images.noAvatar.svg(
+                  height: 120,
+                  width: 120,
+                ),
+                verticalSpace32,
+                const _Email(),
+                verticalSpace32,
+                const _Password(),
+                verticalSpace64,
+                const _LoginButton()
+              ],
+            ),
           ),
           const Align(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomCenter,
             child: SafeArea(
-              child: _LoginButton(),
+              child: _DesignBy(),
             ),
           ),
           if (isBusy)
@@ -124,7 +134,7 @@ class _Email extends StatelessWidget {
           prefixIcon: Stack(
             alignment: Alignment.center,
             children: [
-              Assets.icons.email.svg(),
+              Assets.icons.email.svg(width: 22, height: 22),
             ],
           ),
           errorMessage: state.errorEmail,
@@ -159,7 +169,7 @@ class _Password extends StatelessWidget {
           prefixIcon: Stack(
             alignment: Alignment.center,
             children: [
-              Assets.icons.password.svg(),
+              Assets.icons.password.svg(width: 24, height: 24),
             ],
           ),
           errorMessage: state.errorPassword,
@@ -180,11 +190,11 @@ class _LoginButton extends StatelessWidget {
         children: [
           SizedBox(
             width: double.infinity,
-            height: 42,
+            height: 50,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: AppButton(
-                borderRadius: 8,
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 title: S.of(context).login,
                 titleColor: const Color(0xFFFFFFFF),
                 backgroundColor: Theme.of(context).primaryColor,
@@ -204,5 +214,30 @@ class _LoginButton extends StatelessWidget {
         ],
       );
     });
+  }
+}
+
+class _DesignBy extends StatelessWidget {
+  const _DesignBy({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 8.0),
+        child: Text.rich(
+          TextSpan(
+            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            text: 'Designer: ',
+            children: [
+              TextSpan(
+                text: 'Huu Duong',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

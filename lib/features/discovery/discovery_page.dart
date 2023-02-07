@@ -24,7 +24,6 @@ class DiscoveryPage extends StatelessWidget {
                   vertical: 10,
                 ),
                 decoration: const BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),

@@ -5,7 +5,6 @@ import 'package:flutter_sample/app_router/app_router.dart';
 import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
 import 'package:flutter_sample/injector/app_injector.dart';
 
-
 import '../../generated/l10n.dart';
 import '../../models/user.dart';
 import '../../widgets/app_button.dart';
@@ -26,7 +25,8 @@ class MediaDetailPage extends StatefulWidget {
 }
 
 class _MediaDetailPageState extends State<MediaDetailPage> {
-  final MediaDetailBloc _mediaDetailBloc = AppInjector.instance<MediaDetailBloc>();
+  final MediaDetailBloc _mediaDetailBloc =
+      AppInjector.instance<MediaDetailBloc>();
 
   @override
   void initState() {
@@ -151,18 +151,20 @@ class _ModelInfo extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: AppButton(
-                    onPressed: () {
-                      context.router.push(BookingRoute(modelId: user.id!));
-                    },
-                    title: S.current.booking,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    titleColor: Colors.white,
-                    borderColor: Theme.of(context).primaryColor,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: AppButton(
+                      onPressed: () {
+                        context.router.push(BookingRoute(modelId: user.id!));
+                      },
+                      title: S.current.booking,
+                      backgroundColor: Theme.of(context).primaryColor,
+                      titleColor: Colors.white,
+                      borderColor: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
               ],

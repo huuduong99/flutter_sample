@@ -200,8 +200,8 @@ class _LogoutButton extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       child: SizedBox(
         width: double.infinity,
+        height: 50,
         child: AppButton(
-          borderRadius: 8,
           backgroundColor: Theme.of(context).primaryColor,
           borderColor: Theme.of(context).primaryColor,
           title: S.of(context).logout,

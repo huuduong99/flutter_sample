@@ -6,6 +6,7 @@ import '../../common/constant/spacer.dart';
 import '../../injector/app_injector.dart';
 import '../../widgets/app_button.dart';
 import '../../widgets/circle_avatar_image.dart';
+import '../../widgets/user_info_input.dart';
 import 'bloc/booking_bloc.dart';
 
 class BookingPage extends StatefulWidget {
@@ -53,12 +54,10 @@ class _BookingPageState extends State<BookingPage> {
       elevation: 0,
       shape:
           const Border(bottom: BorderSide(color: Color(0xFFF1F4F6), width: 4)),
-      foregroundColor: const Color(0xFF2C333A),
-      backgroundColor: const Color(0xFFFFFFFF),
-      title: const Text('Your Choice'),
+      backgroundColor: Theme.of(context).primaryColor,
+      title: const Text('Booking'),
       centerTitle: true,
       leading: CloseButton(
-        color: const Color(0xFF858F9B),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -85,7 +84,6 @@ class _BookingPageState extends State<BookingPage> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    color: Colors.white,
                     padding: const EdgeInsets.only(bottom: 16),
                     child: _buildConfirmButton(state),
                   ),
@@ -115,7 +113,7 @@ class _BookingPageState extends State<BookingPage> {
         children: [
           const SizedBox(height: 32),
           _buildUserAvatar(state),
-          _buildInputField(
+          UserInfoInput(
             initialValue: state.editingName ?? '',
             title: 'Họ và tên',
             hintText: 'Nhập họ và tên',
@@ -128,7 +126,7 @@ class _BookingPageState extends State<BookingPage> {
             errorMessage: state.nameError,
           ),
           verticalSpace16,
-          _buildInputField(
+          UserInfoInput(
             initialValue: state.editingPhone ?? '',
             title: 'Số điện thoại',
             hintText: 'Nhập số điện thoại',
@@ -149,7 +147,7 @@ class _BookingPageState extends State<BookingPage> {
             errorMessage: state.phoneError,
           ),
           verticalSpace16,
-          _buildInputField(
+          UserInfoInput(
             initialValue: state.editingEmail ?? '',
             title: 'Email',
             hintText: 'Nhập email',
@@ -162,7 +160,7 @@ class _BookingPageState extends State<BookingPage> {
             errorMessage: state.emailError,
           ),
           verticalSpace16,
-          _buildInputField(
+          UserInfoInput(
             initialValue: state.editingAddress ?? '',
             title: 'Địa chỉ',
             hintText: 'Nhập địa chỉ',
@@ -181,17 +179,20 @@ class _BookingPageState extends State<BookingPage> {
   }
 
   Widget _buildConfirmButton(BookingState state) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: AppButton(
-        onPressed: () {
-          _handleSaveBooking(state);
-        },
-        title: 'Confirm',
-        backgroundColor: Theme.of(context).primaryColor,
-        titleColor: Colors.white,
-        borderColor: Theme.of(context).primaryColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: AppButton(
+          onPressed: () {
+            _handleSaveBooking(state);
+          },
+          title: 'Confirm',
+          backgroundColor: Theme.of(context).primaryColor,
+          titleColor: Colors.white,
+          borderColor: Theme.of(context).primaryColor,
+        ),
       ),
     );
   }
@@ -205,121 +206,6 @@ class _BookingPageState extends State<BookingPage> {
     //       address: state.editingAddress ?? state.user.address ?? '',
     //       imagePath: state.editingImage ?? '',
     //     ));
-  }
-
-  Widget _buildInputField({
-    String? initialValue,
-    required String title,
-    required String hintText,
-    TextEditingController? controller,
-    required bool enable,
-    required FocusNode focusNode,
-    FocusNode? nextFocusNode,
-    required ValueChanged<String> onValueChanged,
-    TextStyle? style,
-    Widget? prefixIcon,
-    List<TextInputFormatter>? inputFormatters,
-    required String? errorMessage,
-    TextInputType textInputType = TextInputType.multiline,
-    TextInputAction textInputAction = TextInputAction.next,
-  }) {
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(color: Color(0xFF5A6271)),
-          ),
-          verticalSpace8,
-          TextFormField(
-            initialValue: initialValue,
-            keyboardType: textInputType,
-            focusNode: focusNode,
-            enabled: enable,
-            textAlign: TextAlign.start,
-            textInputAction: textInputAction,
-            controller: controller,
-            maxLines: null,
-            inputFormatters: inputFormatters,
-            decoration: InputDecoration(
-              prefixIcon: prefixIcon,
-              hintText: hintText,
-              hintStyle: const TextStyle(
-                color: Color(0xff929DAA),
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
-              errorMaxLines: 2,
-              errorStyle: const TextStyle(color: Colors.redAccent),
-              isDense: true,
-              contentPadding: const EdgeInsets.all(10),
-              enabledBorder: errorMessage != null
-                  ? const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    )
-                  : const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xffE2E7ED),
-                      ),
-                    ),
-              focusedBorder: errorMessage != null
-                  ? const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    )
-                  : const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color(0xff3777F3),
-                      ),
-                    ),
-            ),
-            style: style ??
-                const TextStyle(
-                  color: Color(0xFF2C333A),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                ),
-            onFieldSubmitted: (v) {
-              nextFocusNode != null
-                  ? nextFocusNode.requestFocus()
-                  : FocusScope.of(context).unfocus();
-            },
-            onTap: () {
-              focusNode.requestFocus();
-            },
-            onChanged: (change) {
-              onValueChanged(change);
-            },
-          ),
-          if (errorMessage != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.error,
-                    color: Color(0xFFFF4E61),
-                    size: 14,
-                  ),
-                  horizontalSpace4,
-                  Flexible(
-                    child: Text(
-                      errorMessage,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFFFF4E61),
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
   }
 
   Widget _buildUserAvatar(BookingState state) {
