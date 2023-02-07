@@ -20,4 +20,9 @@ class RouterObserver extends AutoRouterObserver {
   void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
     _logger.d('Tab route re-visited: ${route.name}');
   }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    _logger.d('Route pop(${route.settings.name})');
+  }
 }

@@ -97,9 +97,7 @@ class _ModelInfo extends StatelessWidget {
                 ),
                 AppBar(
                   backgroundColor: Colors.transparent,
-                  leading: BackButton(
-                    color: Theme.of(context).primaryColor,
-                  ),
+                  leading: const BackButton(),
                 ),
               ],
             ),
