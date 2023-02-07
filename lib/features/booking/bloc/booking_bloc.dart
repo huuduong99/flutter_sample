@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_sample/repository/user_repository.dart';
 
 import '../../../common/logging/logging_wrapper.dart';
 import '../../../models/user.dart';
+import '../../../repositories/user_repository.dart';
 
 part 'booking_bloc.freezed.dart';
 

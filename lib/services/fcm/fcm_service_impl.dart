@@ -1,7 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:logger/logger.dart';
 
-import '../../background_notification.dart';
+import '../push_notification_service.dart';
 import '../../common/logging/logging_wrapper.dart';
 
 import 'fcm_service.dart';
@@ -10,37 +11,47 @@ class FcmServiceImpl implements FcmService {
   final Logger _logger = getLogger("FcmService");
 
   @override
-  Future<void> registryListenNewNotify() async {
+  Future<void> init() async {
     _logger.d('FCM init');
 
-    /// Nghe thông báo từ FCM khi ở foreground
-    FirebaseMessaging.onMessage
-        .listen(BackgroundNotification.firebaseMessagingHandler);
+    /// Register notification permission ios
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: false, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
 
-    /// Nghe thông báo từ FCM khi ở background và terminated
+    /// Listen message in foreground app
+    FirebaseMessaging.onMessage
+        .listen(PushNotificationService.firebaseMessagingHandler);
+
+    /// Listen message in background and terminated app
     FirebaseMessaging.onBackgroundMessage(
-        BackgroundNotification.firebaseMessagingHandler);
+        PushNotificationService.firebaseMessagingHandler);
+
+    debugPrint('fcmToken: ${await getFcmToken()}');
   }
 
   @override
   Future<void> setupInteractedMessage() async {
-    /// Xử lý tin nhắn khi người dùng nhấn vào thông báo đẩy,khi app ở background
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    /// Handle message when user tapped push notification in background app
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleDecodeMessage);
 
-    /// Xử lý tin nhắn khi người dùng nhấn vào thông báo đẩy,khi app ở terminated
+    /// Handle message when user tapped push notification in background terminated app
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
 
     if (initialMessage != null) {
-      _handleMessage(initialMessage);
+      _handleDecodeMessage(initialMessage);
     }
   }
 
-  ///Xử lý tin nhắn khi nhấp vào thông báo  FCM
-  void _handleMessage(RemoteMessage message) {
+  /// Get payload message from RemoteMessage
+  void _handleDecodeMessage(RemoteMessage message) {
     final appMessage = message.data;
     final String payload = message.data['Payload'] ?? message.data['payload'];
-    BackgroundNotification.setPayload(payload: payload);
+    PushNotificationService.setPayload(payload: payload);
 
     _logger.d('appMessage: $appMessage');
   }

@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/app_router/app_router.dart';
-import 'package:flutter_sample/injector/locator.dart';
+
 import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
 import 'package:flutter_sample/services/fcm/fcm_service.dart';
+
+import '../../injector/app_injector.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,8 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeBloc _homeBloc = locator<HomeBloc>();
-  final FcmService _fcmService = locator<FcmService>();
+  final HomeBloc _homeBloc = AppInjector.instance<HomeBloc>();
+  final FcmService _fcmService = AppInjector.instance<FcmService>();
 
   @override
   void initState() {
@@ -88,24 +89,20 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomNavigationBar(
+    return BottomNavigationBar(
       iconSize: 30.0,
-      selectedColor: Theme.of(context).primaryColor,
-      strokeColor: Theme.of(context).primaryColor,
-      unSelectedColor: Colors.grey[600],
+      selectedItemColor: Theme.of(context).primaryColor,
+      unselectedItemColor: Colors.grey[600],
+      showUnselectedLabels: false,
       backgroundColor: Colors.white,
       currentIndex: tabsRouter.activeIndex,
       onTap: tabsRouter.setActiveIndex,
-      items: [
-        CustomNavigationBarItem(
-          icon: const Icon(Icons.home),
-        ),
-        CustomNavigationBarItem(
-          icon: const Icon(Icons.travel_explore),
-        ),
-        CustomNavigationBarItem(
-          icon: const Icon(Icons.account_circle),
-        ),
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.travel_explore), label: 'Discovery'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle), label: 'Profile'),
       ],
     );
   }

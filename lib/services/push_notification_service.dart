@@ -5,17 +5,19 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'common/logging/logging_wrapper.dart';
-import 'models/app_notification.dart';
+import '../common/logging/logging_wrapper.dart';
+import '../models/app_notification.dart';
 
-class BackgroundNotification {
+class PushNotificationService {
+  PushNotificationService._();
+
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static const AndroidNotificationChannel _channel = AndroidNotificationChannel(
     'high_importance_channel',
-    'Thông báo nội dung',
-    description: 'Thông báo về các thay đổi của app',
+    'Content notification',
+    description: 'Notify about app change',
     importance: Importance.max,
   );
   static final PublishSubject<String> _eventSubjectTapped =
@@ -23,7 +25,7 @@ class BackgroundNotification {
 
   static bool _isInit = false;
 
-  static final Logger _logger = getLogger('BackgroundNotification');
+  static final Logger _logger = getLogger('PushNotificationService');
 
   static Stream<String> get listenOnNotificationTapped =>
       _eventSubjectTapped.stream;
@@ -34,7 +36,7 @@ class BackgroundNotification {
     }
     _initSetting();
     _isInit = true;
-    _logger.d('BackgroundNotification init');
+    _logger.d('PushNotificationService init');
   }
 
   static Future<void> firebaseMessagingHandler(RemoteMessage message) async {

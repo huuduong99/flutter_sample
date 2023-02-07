@@ -6,6 +6,8 @@ import '../../services/fcm/fcm_service.dart';
 import '../../services/fcm/fcm_service_impl.dart';
 
 class ServiceInjector {
+  ServiceInjector._();
+
   static void register(GetIt injector) async {
     injector.registerLazySingleton<FcmService>(
       () => FcmServiceImpl(),
@@ -16,7 +18,4 @@ class ServiceInjector {
     );
   }
 
-  static void resetSingleton(GetIt injector) {
-    injector.resetLazySingleton<FcmService>();
-  }
 }

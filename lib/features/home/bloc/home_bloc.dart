@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/models/app_notification.dart';
 import 'package:flutter_sample/models/user.dart';
-import 'package:flutter_sample/repository/user_repository.dart';
 
-import '../../../background_notification.dart';
+import '../../../repositories/user_repository.dart';
+import '../../../services/push_notification_service.dart';
 import '../../../common/logging/logging_wrapper.dart';
 
 part 'home_bloc.freezed.dart';
@@ -22,7 +22,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }) : super(const HomeState()) {
     _userRepository = userRepository;
 
-    _subscription = BackgroundNotification.listenOnNotificationTapped.listen(
+    _subscription = PushNotificationService.listenOnNotificationTapped.listen(
       (data) {
         _handleNotifyMessage(data);
       },

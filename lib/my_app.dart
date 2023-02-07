@@ -3,8 +3,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get_it/get_it.dart';
-import 'package:flutter_sample/injector/locator.dart' as di;
+import 'package:flutter_sample/injector/app_injector.dart';
 import 'package:flutter_sample/services/fcm/fcm_service.dart';
 import 'package:flutter_sample/widgets/reset_widget.dart';
 
@@ -21,22 +20,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late final FcmService _fcmService;
   late final ApplicationBloc _applicationBloc;
   final _appRouter = AppRouter();
 
   @override
   void initState() {
-    di.init(GetIt.I);
-    _applicationBloc = GetIt.I<ApplicationBloc>();
-    _fcmService = GetIt.I<FcmService>();
-    _fcmService.registryListenNewNotify();
+    AppInjector.init();
+    _applicationBloc = AppInjector.instance<ApplicationBloc>();
+    AppInjector.instance<FcmService>().init();
     super.initState();
   }
 
   @override
   void dispose() {
-    _applicationBloc.close();
     super.dispose();
   }
 
@@ -47,9 +43,11 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<ApplicationBloc>.value(value: _applicationBloc),
       ],
       child: BlocConsumer<ApplicationBloc, ApplicationState>(
+        listenWhen: (previous, current) =>
+            previous.applicationHandle != current.applicationHandle,
         listener: (context, state) {
           state.applicationHandle?.when(logout: () {
-            di.locator.reset();
+            AppInjector.reset();
             RestartWidget.restartApp(context);
           });
         },

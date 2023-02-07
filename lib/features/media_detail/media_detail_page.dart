@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/app_router/app_router.dart';
 import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
-import 'package:flutter_sample/injector/locator.dart';
+import 'package:flutter_sample/injector/app_injector.dart';
+
 
 import '../../generated/l10n.dart';
 import '../../models/user.dart';
@@ -25,7 +26,7 @@ class MediaDetailPage extends StatefulWidget {
 }
 
 class _MediaDetailPageState extends State<MediaDetailPage> {
-  final MediaDetailBloc _mediaDetailBloc = locator<MediaDetailBloc>();
+  final MediaDetailBloc _mediaDetailBloc = AppInjector.instance<MediaDetailBloc>();
 
   @override
   void initState() {
