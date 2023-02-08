@@ -53,7 +53,7 @@ dependencies:
   collection: ^1.16.0
   auto_route: ^5.0.4
   hive_flutter: ^1.1.0
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.0+1
   flutter_spinkit: ^5.1.0
   intl: ^0.17.0
   intl_utils: ^2.8.1
