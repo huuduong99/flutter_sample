@@ -60,6 +60,7 @@ dependencies:
   percent_indicator: ^4.2.2
   flex_color_scheme: ^6.1.2
   firebase_crashlytics: ^3.0.11
+  flutter_flavorizr: ^2.1.6
 
 dev_dependencies:
   flutter_test:
@@ -125,3 +126,60 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    dev:
+      app:
+        name: " [Dev] Booking App"
+        icon: "assets/launchers/popsicle_dev.png"
+      android:
+        applicationId: "com.example.flutter_sample.dev"
+        firebase:
+          config: ".firebase/dev/google-services.json"
+        customConfig:
+          versionNameSuffix: "\"-dev\""
+      ios:
+        bundleId: "com.example.flutter_sample.dev"
+        firebase:
+          config: ".firebase/dev/GoogleService-Info.plist"
+
+    production:
+      app:
+        name: "[Pro] Booking App"
+        icon: "assets/launchers/ice-cream_prod.png"
+      android:
+        applicationId: "com.example.flutter_sample.pro"
+        firebase:
+          config: ".firebase/production/google-services.json"
+        customConfig:
+          versionNameSuffix: "\"-pro\""
+      ios:
+        bundleId: "com.example.flutter_sample.pro"
+        firebase:
+          config: ".firebase/production/GoogleService-Info.plist"
+
+  instructions:
+    - assets:download
+    - assets:extract
+    - android:androidManifest
+    - android:buildGradle
+    - android:dummyAssets
+    - android:icons
+    - flutter:targets
+    - ios:xcconfig
+    - ios:buildTargets
+    - ios:schema
+    - ios:dummyAssets
+    - ios:icons
+    - ios:plist
+    - ios:launchScreen
+    - google:firebase
+    - assets:clean
+    - ide:config

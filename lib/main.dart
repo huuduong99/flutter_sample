@@ -14,9 +14,8 @@ import 'bloc_observer.dart';
 import 'firebase_options.dart';
 import 'my_app.dart';
 
-Future<void> main() async {
+Future<void> runMain() async {
   runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
     await Hive.initFlutter();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
