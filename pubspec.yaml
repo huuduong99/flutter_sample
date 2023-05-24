@@ -140,13 +140,13 @@ flavorizr:
         name: " [Dev] Booking App"
         icon: "assets/launchers/popsicle_dev.png"
       android:
-        applicationId: "com.example.flutter_sample.dev"
+        applicationId: "com.dev.flutterSample.app"
         firebase:
           config: ".firebase/dev/google-services.json"
         customConfig:
           versionNameSuffix: "\"-dev\""
       ios:
-        bundleId: "com.example.flutter_sample.dev"
+        bundleId: "com.dev.flutterSample.app"
         firebase:
           config: ".firebase/dev/GoogleService-Info.plist"
 
@@ -155,13 +155,13 @@ flavorizr:
         name: "[Pro] Booking App"
         icon: "assets/launchers/ice-cream_prod.png"
       android:
-        applicationId: "com.example.flutter_sample.pro"
+        applicationId: "com.pro.flutterSample.app"
         firebase:
           config: ".firebase/production/google-services.json"
         customConfig:
           versionNameSuffix: "\"-pro\""
       ios:
-        bundleId: "com.example.flutter_sample.pro"
+        bundleId: "com.pro.flutterSample.app"
         firebase:
           config: ".firebase/production/GoogleService-Info.plist"
 
@@ -172,7 +172,6 @@ flavorizr:
     - android:buildGradle
     - android:dummyAssets
     - android:icons
-    - flutter:targets
     - ios:xcconfig
     - ios:buildTargets
     - ios:schema

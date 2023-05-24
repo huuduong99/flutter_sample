@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCrVFYtyhauTNafP_zqpvT3czVXIFgMIJI',
-    appId: '1:506975803166:android:7a5b8a5d11112f44ca9b0f',
+    appId: '1:506975803166:android:41dc5df18f6c2b0cca9b0f',
     messagingSenderId: '506975803166',
     projectId: 'push-notification-e17b5',
     storageBucket: 'push-notification-e17b5.appspot.com',
@@ -59,12 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBTXBd3MVdfd6_VaZCDoISCGcSVFZVCWAE',
-    appId: '1:506975803166:ios:d90603ee574345c2ca9b0f',
+    appId: '1:506975803166:ios:30224b1aaa906765ca9b0f',
     messagingSenderId: '506975803166',
     projectId: 'push-notification-e17b5',
     storageBucket: 'push-notification-e17b5.appspot.com',
     androidClientId: '506975803166-0oaarf6fj1skujhv81ma2g3keamspbmq.apps.googleusercontent.com',
-    iosClientId: '506975803166-i47ia8o3rphrln4m8seg06sspqlg4k17.apps.googleusercontent.com',
-    iosBundleId: 'com.example.flutterSample',
+    iosClientId: '506975803166-atdd87m59mtpfpsns3ion06ql474q9ci.apps.googleusercontent.com',
+    iosBundleId: 'com.dev.flutterSample.app',
   );
 }
