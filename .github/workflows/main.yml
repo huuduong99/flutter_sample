@@ -26,7 +26,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.7.8"
+          flutter-version: "3.7.12"
           channel: 'stable'
           cache: true
 
@@ -49,7 +49,7 @@ jobs:
       #      run: flutter test
 
       - name: Build apk
-        run: flutter build apk
+        run: flutter build apk --flavor dev -t lib/main_dev.dart
 
       - name: Upload generated apk to the artifacts
         uses: actions/upload-artifact@v1
