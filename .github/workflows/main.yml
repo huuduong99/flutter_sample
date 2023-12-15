@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-dev-release
-          path: build/app/outputs/apk/release/app-dev-release.apk
+          path: build/app/outputs/flutter-apk/app-dev-release.apk
 
       #    - name: Install npm
       #      uses: actions/setup-node@v3
@@ -65,7 +65,7 @@ jobs:
       #      run: npm install -g firebase-tools --force
       #
       #    - name: Upload artifact to Firebase App Distribution
-      #      run: firebase appdistribution:distribute build/app/outputs/apk/release/app-dev-release.apk --app ${{secrets.FIREBASE_APP_ID}} --token "${{secrets.FIREBASE_TOKEN}}" --release-notes "${{ github.event.pull_request.title }}" --groups "pre-tester"
+      #      run: firebase appdistribution:distribute build/app/outputs/flutter-apk/app-dev-release.apk --app ${{secrets.FIREBASE_APP_ID}} --token "${{secrets.FIREBASE_TOKEN}}" --release-notes "${{ github.event.pull_request.title }}" --groups "pre-tester"
 
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
@@ -74,4 +74,4 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: pre-tester
           release_notes: ${{ github.event.pull_request.title }}
-          file: build/app/outputs/apk/release/app-dev-release.apk
+          file: build/app/outputs/flutter-apk/app-dev-release.apk
