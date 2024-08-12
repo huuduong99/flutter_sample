@@ -1,17 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/login/bloc/login_bloc.dart';
 import 'package:flutter_sample/widgets/loading_indicator.dart';
 import 'package:flutter_sample/widgets/user_info_input.dart';
 
-import '../../common/constant/spacer.dart';
-import '../../generated/assets.gen.dart';
-import '../../generated/l10n.dart';
-import '../../injector/app_injector.dart';
-import '../../widgets/app_button.dart';
+import 'package:flutter_sample/common/constant/spacer.dart';
+import 'package:flutter_sample/generated/assets.gen.dart';
+import 'package:flutter_sample/generated/l10n.dart';
+import 'package:flutter_sample/injector/app_injector.dart';
+import 'package:flutter_sample/widgets/app_button.dart';
 
+@RoutePage(name: 'LoginRoute')
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _loginBloc = AppInjector.instance<LoginBloc>();
+    _loginBloc = AppInjector.get<LoginBloc>();
   }
 
   @override
@@ -90,7 +91,7 @@ class _Body extends StatelessWidget {
                 verticalSpace32,
                 const _Password(),
                 verticalSpace64,
-                const _LoginButton()
+                const _LoginButton(),
               ],
             ),
           ),
@@ -184,36 +185,38 @@ class _LoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: AppButton(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                title: S.of(context).login,
-                titleColor: const Color(0xFFFFFFFF),
-                backgroundColor: Theme.of(context).primaryColor,
-                borderColor: Theme.of(context).primaryColor,
-                onPressed: () async {
-                  FocusScope.of(context).unfocus();
-                  context.read<LoginBloc>().add(
-                        LoginEvent.loginButtonPressed(
-                          email: state.email,
-                          password: state.password,
-                        ),
-                      );
-                },
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: AppButton(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  title: S.of(context).login,
+                  titleColor: const Color(0xFFFFFFFF),
+                  backgroundColor: Theme.of(context).primaryColor,
+                  borderColor: Theme.of(context).primaryColor,
+                  onPressed: () async {
+                    FocusScope.of(context).unfocus();
+                    context.read<LoginBloc>().add(
+                          LoginEvent.loginButtonPressed(
+                            email: state.email,
+                            password: state.password,
+                          ),
+                        );
+                  },
+                ),
               ),
             ),
-          ),
-        ],
-      );
-    });
+          ],
+        );
+      },
+    );
   }
 }
 

@@ -1,8 +1,13 @@
+import 'package:flutter_sample/injector/app_injector.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'config_service.dart';
+import 'package:flutter_sample/services/config_service/config_service.dart';
 
 class ConfigServiceImpl implements ConfigService {
+
+  ConfigServiceImpl(){
+    init();
+  }
   /// Whether the secure storage service is initialized.
   bool _isInitialized = false;
   late Box _box;
@@ -10,12 +15,14 @@ class ConfigServiceImpl implements ConfigService {
   @override
   Future<void> init() async {
     if (_isInitialized) {
+      AppInjector.signalReady(this);
       return;
     }
     _box = await Hive.openBox<dynamic>(
       'configStorage',
     );
     _isInitialized = true;
+    AppInjector.signalReady(this);
   }
 
   @override

@@ -35,13 +35,16 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(padding),
-        elevation: MaterialStateProperty.all(elevation),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
+        padding: WidgetStateProperty.all(padding),
+        elevation: WidgetStateProperty.all(elevation),
+        foregroundColor: WidgetStateProperty.all(Colors.white),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
             side: BorderSide(color: borderColor, width: borderWidth),
-            borderRadius: BorderRadius.all(Radius.circular(borderRadius)))),
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+          ),
+        ),
+        backgroundColor: WidgetStateProperty.all(backgroundColor),
       ),
       onPressed: onPressed,
       onLongPress: onLongPressed,

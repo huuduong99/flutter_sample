@@ -1,7 +1,7 @@
 import 'package:flutter_sample/injector/service_injector.dart';
 import 'package:get_it/get_it.dart';
 
-import 'bloc_injector.dart';
+import 'package:flutter_sample/injector/bloc_injector.dart';
 
 /// Injector using get_it package for simple service locator pattern.
 ///
@@ -13,7 +13,22 @@ class AppInjector {
 
   static final GetIt _instance = GetIt.I;
 
-  static GetIt get instance => _instance;
+  /// Returns T if it already register inside _instance
+  static T get<T extends Object>({
+    String? instanceName,
+    dynamic param1,
+    dynamic param2,
+  }) {
+    return _instance.get<T>(
+      instanceName: instanceName,
+      param1: param1,
+      param2: param2,
+    );
+  }
+
+  static void signalReady(Object? instance) => _instance.signalReady(instance);
+
+  static Future<void> allReady() => _instance.allReady();
 
   /// call to register all services needed for app to be active.
   static init() {

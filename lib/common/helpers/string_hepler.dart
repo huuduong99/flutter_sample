@@ -1,6 +1,6 @@
-const String emailPattern = r"^[\w-\.]+@([\w-]){2,4}";
+const String emailPattern = r'^[\w-\.]+@([\w-]){2,4}';
 const String phoneNumberPattern =
-    r"(?:\b|[^0-9])((0|84|\+84)(\s?)([2-9]|[0-9])((\d)(\s+|\.)?){8})(?:\b|[^0-9])";
+    r'(?:\b|[^0-9])((0|84|\+84)(\s?)([2-9]|[0-9])((\d)(\s+|\.)?){8})(?:\b|[^0-9])';
 
 const String imagePattern = r'.(jpeg|jpg|gif|png|bmp)$';
 

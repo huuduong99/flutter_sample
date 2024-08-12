@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:flutter_sample/generated/assets.gen.dart';
 
-import '../common/constant/spacer.dart';
+import 'package:flutter_sample/common/constant/spacer.dart';
 
 class LoadingImageWithPercent extends StatefulWidget {
   const LoadingImageWithPercent({

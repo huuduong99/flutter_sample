@@ -1,14 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
 
-import '../../common/constant/spacer.dart';
-import '../../models/user.dart';
-import '../../widgets/circle_avatar_image.dart';
+import 'package:flutter_sample/common/constant/spacer.dart';
+import 'package:flutter_sample/models/user/user.dart';
+import 'package:flutter_sample/widgets/circle_avatar_image.dart';
 
+@RoutePage(name: 'NewsFeedRoute')
 class NewsFeedPage extends StatefulWidget {
   const NewsFeedPage({Key? key}) : super(key: key);
 
@@ -45,7 +46,7 @@ class _NewsFeedPageState extends State<NewsFeedPage> {
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         );
@@ -70,9 +71,7 @@ class _Header extends StatelessWidget {
           ),
           title: Text(
             state.user.name ?? '',
-            style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           subtitle: const Text(
             'Thành viên VIP của Booking App',
@@ -124,7 +123,9 @@ class _UserCardItem extends StatelessWidget {
                     Text(
                       user.name ?? '',
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     verticalSpace4,
                     Text(
@@ -133,7 +134,7 @@ class _UserCardItem extends StatelessWidget {
                           TextStyle(fontSize: 12, color: Colors.grey.shade900),
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),

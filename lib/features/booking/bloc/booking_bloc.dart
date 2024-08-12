@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../common/logging/logging_wrapper.dart';
-import '../../../models/user.dart';
-import '../../../repositories/user_repository.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/models/user/user.dart';
+import 'package:flutter_sample/repositories/user_repository.dart';
 
 part 'booking_bloc.freezed.dart';
 
@@ -45,8 +45,8 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
           user: user,
         ),
       );
-    } catch (e, stack) {
-      _logger.e('BookingLoadFailure', e, stack);
+    } catch (e, s) {
+      _logger.e('BookingLoadFailure', error: e, stackTrace: s);
       emit(
         state.copyWith(
           status: BookingStatus.loadFailed,
@@ -57,7 +57,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   }
 
   FutureOr<void> _onImageChanged(
-      BookingImageChanged event, Emitter<BookingState> emit) {
+    BookingImageChanged event,
+    Emitter<BookingState> emit,
+  ) {
     emit(
       state.copyWith(
         editingImage: event.imagePath,
@@ -67,7 +69,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   }
 
   FutureOr<void> _onNameChanged(
-      BookingNameChanged event, Emitter<BookingState> emit) {
+    BookingNameChanged event,
+    Emitter<BookingState> emit,
+  ) {
     final bool nameIsValid = event.name.trim().isNotEmpty;
 
     String? nameError;
@@ -77,15 +81,19 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       }
     }
 
-    emit(state.copyWith(
-      editingName: event.name,
-      nameError: nameError,
-      status: BookingStatus.none,
-    ));
+    emit(
+      state.copyWith(
+        editingName: event.name,
+        nameError: nameError,
+        status: BookingStatus.none,
+      ),
+    );
   }
 
   FutureOr<void> _onPhoneChanged(
-      BookingPhoneChanged event, Emitter<BookingState> emit) {
+    BookingPhoneChanged event,
+    Emitter<BookingState> emit,
+  ) {
     // final bool phoneIsValid = event.phoneNumber.isPhoneNumber;
     //
     // String? phoneError;
@@ -105,7 +113,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   }
 
   FutureOr<void> _onEmailChanged(
-      BookingEmailChanged event, Emitter<BookingState> emit) {
+    BookingEmailChanged event,
+    Emitter<BookingState> emit,
+  ) {
     // final bool emailIsValid = event.email.trim().isEmpty || event.email.isEmail;
     //
     // String? emailError;
@@ -123,7 +133,9 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
   }
 
   FutureOr<void> _onAddressChanged(
-      BookingAddressChanged event, Emitter<BookingState> emit) {
+    BookingAddressChanged event,
+    Emitter<BookingState> emit,
+  ) {
     final bool addressIsValid = event.address.trim().isNotEmpty;
 
     String? addressError;
@@ -134,20 +146,26 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       }
     }
 
-    emit(state.copyWith(
-      editingAddress: event.address,
-      addressError: addressError,
-      status: BookingStatus.none,
-    ));
+    emit(
+      state.copyWith(
+        editingAddress: event.address,
+        addressError: addressError,
+        status: BookingStatus.none,
+      ),
+    );
   }
 
   FutureOr<void> _onCancelAllChanged(
-      BookingCancelAllChanged event, Emitter<BookingState> emit) {
+    BookingCancelAllChanged event,
+    Emitter<BookingState> emit,
+  ) {
     emit(BookingState(user: state.user, status: BookingStatus.loaded));
   }
 
   FutureOr<void> _onSaveButtonPressed(
-      BookingSaveButtonPressed event, Emitter<BookingState> emit) async {
+    BookingSaveButtonPressed event,
+    Emitter<BookingState> emit,
+  ) async {
     // bool isValid = true;
     //
     // if (event.name.trim().isEmpty) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../common/constant/spacer.dart';
+import 'package:flutter_sample/common/constant/spacer.dart';
 
 class UserInfoInput extends StatelessWidget {
   const UserInfoInput({
@@ -45,15 +45,19 @@ class UserInfoInput extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text.rich(TextSpan(
-            text: title,
-            style: const TextStyle(color: Color(0xFF5A6271)),
-            children: [
-              if (requiredEnterField)
-                const TextSpan(
-                    text: ' *', style: TextStyle(color: Color(0xFFDA072D))),
-            ],
-          )),
+          Text.rich(
+            TextSpan(
+              text: title,
+              style: const TextStyle(color: Color(0xFF5A6271)),
+              children: [
+                if (requiredEnterField)
+                  const TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Color(0xFFDA072D)),
+                  ),
+              ],
+            ),
+          ),
           verticalSpace8,
           TextFormField(
             obscureText: obscureText,
@@ -68,9 +72,10 @@ class UserInfoInput extends StatelessWidget {
               prefixIcon: prefixIcon,
               hintText: hintText,
               hintStyle: const TextStyle(
-                  color: Color(0xff929DAA),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14),
+                color: Color(0xff929DAA),
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+              ),
               errorMaxLines: 2,
               errorStyle: const TextStyle(color: Colors.redAccent),
               isDense: true,
@@ -105,9 +110,10 @@ class UserInfoInput extends StatelessWidget {
                     ),
             ),
             style: const TextStyle(
-                color: Color(0xFF2C333A),
-                fontWeight: FontWeight.w400,
-                fontSize: 16),
+              color: Color(0xFF2C333A),
+              fontWeight: FontWeight.w400,
+              fontSize: 16,
+            ),
             onFieldSubmitted: (v) {
               nextFocusNode != null
                   ? nextFocusNode!.requestFocus()

@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
 import 'package:flutter_sample/injector/app_injector.dart';
 
-import '../../generated/l10n.dart';
-import '../../models/user.dart';
-import '../../widgets/app_button.dart';
-import '../../widgets/image_viewer.dart';
+import 'package:flutter_sample/generated/l10n.dart';
+import 'package:flutter_sample/models/user/user.dart';
+import 'package:flutter_sample/widgets/app_button.dart';
+import 'package:flutter_sample/widgets/image_viewer.dart';
 
+@RoutePage(name: 'MediaDetailRoute')
 class MediaDetailPage extends StatefulWidget {
   const MediaDetailPage({
     Key? key,
@@ -25,16 +26,24 @@ class MediaDetailPage extends StatefulWidget {
 }
 
 class _MediaDetailPageState extends State<MediaDetailPage> {
-  final MediaDetailBloc _mediaDetailBloc =
-      AppInjector.instance<MediaDetailBloc>();
+  late final MediaDetailBloc _mediaDetailBloc;
 
   @override
   void initState() {
-    _mediaDetailBloc.add(MediaDetailEvent.loaded(
-      id: widget.id,
-      heroTag: widget.heroTag,
-    ));
+    _mediaDetailBloc = AppInjector.get<MediaDetailBloc>()
+      ..add(
+        MediaDetailEvent.loaded(
+          id: widget.id,
+          heroTag: widget.heroTag,
+        ),
+      );
     super.initState();
+  }
+
+  @override
+  dispose() {
+    _mediaDetailBloc.close();
+    super.dispose();
   }
 
   @override
@@ -54,13 +63,14 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MediaDetailBloc, MediaDetailState>(
-        buildWhen: (previous, current) => previous.status != current.status,
-        builder: (context, state) {
-          if (state.status == MediaDetailStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return const _ModelInfo();
-        });
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        if (state.status == MediaDetailStatus.loading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return const _ModelInfo();
+      },
+    );
   }
 }
 
@@ -85,8 +95,9 @@ class _ModelInfo extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30)),
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30),
+                    ),
                   ),
                   child: ImageViewer(
                     url: user.imagePath ?? '',

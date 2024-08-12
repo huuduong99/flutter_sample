@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
 
-import '../../app_router/app_router.dart';
-import '../../widgets/image_viewer.dart';
+import 'package:flutter_sample/widgets/image_viewer.dart';
 
+@RoutePage(name: 'DiscoveryRoute')
 class DiscoveryPage extends StatelessWidget {
   const DiscoveryPage({Key? key}) : super(key: key);
 
@@ -40,10 +41,12 @@ class DiscoveryPage extends StatelessWidget {
                     final id = user.id!;
                     return RawMaterialButton(
                       onPressed: () {
-                        context.router.push(MediaDetailRoute(
-                          id: id,
-                          heroTag: 'grid[$id]',
-                        ));
+                        context.router.push(
+                          MediaDetailRoute(
+                            id: id,
+                            heroTag: 'grid[$id]',
+                          ),
+                        );
                       },
                       child: Hero(
                         tag: 'grid[$id]',
@@ -55,7 +58,7 @@ class DiscoveryPage extends StatelessWidget {
                   },
                 ),
               ),
-            )
+            ),
           ],
         );
       },

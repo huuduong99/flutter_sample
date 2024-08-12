@@ -5,11 +5,12 @@ import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 import 'package:flutter_sample/generated/assets.gen.dart';
 import 'package:flutter_sample/widgets/app_button.dart';
 
-import '../../app_router/routes.dart';
-import '../../common/constant/spacer.dart';
-import '../../generated/l10n.dart';
-import '../../widgets/border_circle_avatar_image.dart';
+import 'package:flutter_sample/app_router/routes.dart';
+import 'package:flutter_sample/common/constant/spacer.dart';
+import 'package:flutter_sample/generated/l10n.dart';
+import 'package:flutter_sample/widgets/border_circle_avatar_image.dart';
 
+@RoutePage(name: 'ProfileRoute')
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -58,12 +59,12 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Expanded(
           child: SingleChildScrollView(
             child: Column(
-              children: const [
+              children: [
                 _UserPanel(),
                 _UserInfo(),
                 verticalSpace12,
@@ -74,7 +75,7 @@ class _Body extends StatelessWidget {
             ),
           ),
         ),
-        const _LogoutButton(),
+        _LogoutButton(),
       ],
     );
   }
@@ -99,7 +100,7 @@ class _UserPanel extends StatelessWidget {
               stops: const [0.55, 0.45],
               colors: [
                 Theme.of(context).primaryColor,
-                isDarkMode ? Colors.black12 : Colors.white
+                isDarkMode ? Colors.black12 : Colors.white,
               ],
             ),
           ),
@@ -149,7 +150,9 @@ class _UserInfo extends StatelessWidget {
                   TextSpan(
                     text: 'Booking App',
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor, fontSize: 14),
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
@@ -238,15 +241,17 @@ class _MenuItem extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         boxShadow: [
           BoxShadow(
-              offset: const Offset(0, 1),
-              blurRadius: 10,
-              spreadRadius: 0,
-              color: const Color(0xFF582300).withOpacity(0.05)),
+            offset: const Offset(0, 1),
+            blurRadius: 10,
+            spreadRadius: 0,
+            color: const Color(0xFF582300).withOpacity(0.05),
+          ),
           BoxShadow(
-              offset: const Offset(0, 2),
-              blurRadius: 4,
-              spreadRadius: 0,
-              color: const Color(0xFF582300).withOpacity(0.02)),
+            offset: const Offset(0, 2),
+            blurRadius: 4,
+            spreadRadius: 0,
+            color: const Color(0xFF582300).withOpacity(0.02),
+          ),
         ],
       ),
       child: ListTile(

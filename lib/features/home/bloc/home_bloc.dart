@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/services/push_notification_service/push_notification_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_sample/models/app_notification.dart';
-import 'package:flutter_sample/models/user.dart';
+import 'package:flutter_sample/models/app_notification/app_notification.dart';
+import 'package:flutter_sample/models/user/user.dart';
 
-import '../../../repositories/user_repository.dart';
-import '../../../services/push_notification_service.dart';
-import '../../../common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/repositories/user_repository.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 
 part 'home_bloc.freezed.dart';
 
@@ -58,7 +58,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           status: HomeStatus.loadFailure,
         ),
       );
-      _logger.e('_onHomeLoadedFailure', e.toString(), s);
+      _logger.e('_onHomeLoadedFailure', error: e, stackTrace: s);
     }
   }
 

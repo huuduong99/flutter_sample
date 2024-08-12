@@ -22,21 +22,17 @@ class SimplePrettyPrinter extends LogPrinter {
   }
 
   static final levelPrefixes = {
-    Level.verbose: '[V]',
     Level.debug: '[D]',
     Level.info: '[I]',
     Level.warning: '[W]',
     Level.error: '[E]',
-    Level.wtf: '[WTF]',
   };
 
-  static final levelColors = {
-    Level.verbose: AnsiColor.fg(AnsiColor.grey(0.5)),
+  static const levelColors = {
     Level.debug: AnsiColor.none(),
-    Level.info: AnsiColor.fg(12),
-    Level.warning: AnsiColor.fg(208),
-    Level.error: AnsiColor.fg(196),
-    Level.wtf: AnsiColor.fg(199),
+    Level.info:  AnsiColor.fg(12),
+    Level.warning:  AnsiColor.fg(208),
+    Level.error:  AnsiColor.fg(196),
   };
 
   String _labelFor(Level level) {
@@ -67,7 +63,6 @@ Logger getLogger(String className) {
       SimplePrettyPrinter(className),
     ),
     output: ConsoleOutput(),
-    level: Level.verbose,
   );
 }
 
@@ -77,7 +72,7 @@ class ConsoleOutput extends LogOutput {
   @override
   void output(OutputEvent event) {
     const String ct =
-        "-------------------------------------------------------------------";
+        '-------------------------------------------------------------------';
     if ([Level.warning, Level.error].contains(event.level)) {
       printLogs.addAll(event.lines);
     }

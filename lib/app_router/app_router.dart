@@ -1,62 +1,53 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/app_router/routes.dart';
-import 'package:flutter_sample/features/application/splash_page.dart';
-import 'package:flutter_sample/features/booking/booking_page.dart';
-import 'package:flutter_sample/features/discovery/discovery_page.dart';
-import 'package:flutter_sample/features/home/home_page.dart';
-import 'package:flutter_sample/features/media_detail/media_detail_page.dart';
-import 'package:flutter_sample/features/news_feed/news_feed_page.dart';
-import 'package:flutter_sample/features/profile/profile_page.dart';
-import 'package:flutter_sample/features/settings/settings_page.dart';
 
-import '../features/login/login_page.dart';
+@AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
+class AppRouter extends RootStackRouter {
+  @override
+  RouteType get defaultRouteType => const RouteType.adaptive();
 
-part 'app_router.gr.dart';
-
-@AdaptiveAutoRouter(
-  replaceInRouteName: 'Page|Screen,Route',
-  routes: <AutoRoute>[
-    AutoRoute(
-      initial: true,
-      path: Routes.splash,
-      page: SplashPage,
-    ),
-    AutoRoute(
-      path: Routes.login,
-      page: LoginPage,
-    ),
-    AutoRoute<String>(
-      path: Routes.home,
-      page: HomePage,
-      children: [
+  @override
+  List<AutoRoute> get routes => [
         AutoRoute(
-          path: Routes.newsFeed,
-          page: NewsFeedPage,
+          initial: true,
+          path: Routes.splash,
+          page: SplashRoute.page,
         ),
         AutoRoute(
-          path: Routes.discovery,
-          page: DiscoveryPage,
+          path: Routes.login,
+          page: LoginRoute.page,
         ),
         AutoRoute(
-          path: Routes.profile,
-          page: ProfilePage,
+          path: Routes.home,
+          page: HomeRoute.page,
+          children: [
+            AutoRoute(
+              path: Routes.newsFeed,
+              page: NewsFeedRoute.page,
+            ),
+            AutoRoute(
+              path: Routes.discovery,
+              page: DiscoveryRoute.page,
+            ),
+            AutoRoute(
+              path: Routes.profile,
+              page: ProfileRoute.page,
+            ),
+          ],
         ),
-      ],
-    ),
-    AutoRoute(
-      path: Routes.mediaDetail,
-      page: MediaDetailPage,
-    ),
-    AutoRoute(
-      path: Routes.booking,
-      page: BookingPage,
-    ),
-    AutoRoute(
-      path: Routes.settings,
-      page: SettingPage,
-    ),
-    RedirectRoute(path: '*', redirectTo: Routes.home),
-  ],
-)
-class AppRouter extends _$AppRouter {}
+        AutoRoute(
+          path: Routes.mediaDetail,
+          page: MediaDetailRoute.page,
+        ),
+        AutoRoute(
+          path: Routes.booking,
+          page: BookingRoute.page,
+        ),
+        AutoRoute(
+          path: Routes.settings,
+          page: SettingRoute.page,
+        ),
+        RedirectRoute(path: '*', redirectTo: Routes.home),
+      ];
+}

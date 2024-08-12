@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../generated/assets.gen.dart';
-import '../../generated/l10n.dart';
+import 'package:flutter_sample/generated/assets.gen.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 
 extension LocaleStringExtension on String {
   String get localeName {

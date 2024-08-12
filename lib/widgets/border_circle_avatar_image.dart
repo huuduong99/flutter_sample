@@ -1,21 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/assets.gen.dart';
+import 'package:flutter_sample/generated/assets.gen.dart';
 
 /// Avatar được bo tròn với viền bọc bên ngoài
 class BorderCircleAvatarImage extends StatelessWidget {
-  const BorderCircleAvatarImage(
-      {Key? key,
-      this.size = 80,
-      this.avatar,
-      this.name = '',
-      this.borderColor = Colors.white,
-      this.borderSide = 2,
-      this.style = const TextStyle(
-          color: Colors.blue, fontWeight: FontWeight.w600, fontSize: 10),
-      this.backgroundColor})
-      : assert(size > 2, borderSide >= 0 && borderSide < size),
+  const BorderCircleAvatarImage({
+    Key? key,
+    this.size = 80,
+    this.avatar,
+    this.name = '',
+    this.borderColor = Colors.white,
+    this.borderSide = 2,
+    this.style = const TextStyle(
+      color: Colors.blue,
+      fontWeight: FontWeight.w600,
+      fontSize: 10,
+    ),
+    this.backgroundColor,
+  })  : assert(size > 2, borderSide >= 0 && borderSide < size),
         super(key: key);
 
   final double size;

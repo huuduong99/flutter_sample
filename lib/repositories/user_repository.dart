@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_sample/models/user.dart';
+import 'package:flutter_sample/models/user/user.dart';
 
 class UserRepository {
   final List<User> _users = const [

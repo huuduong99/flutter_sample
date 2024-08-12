@@ -2,14 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 
 import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
 import 'package:flutter_sample/services/fcm/fcm_service.dart';
 
-import '../../injector/app_injector.dart';
+import 'package:flutter_sample/injector/app_injector.dart';
 
+@RoutePage(name: 'HomeRoute')
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -18,8 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeBloc _homeBloc = AppInjector.instance<HomeBloc>();
-  final FcmService _fcmService = AppInjector.instance<FcmService>();
+  final HomeBloc _homeBloc = AppInjector.get<HomeBloc>();
+  final FcmService _fcmService = AppInjector.get<FcmService>();
 
   @override
   void initState() {
@@ -80,13 +81,10 @@ class _Body extends StatelessWidget {
           ProfileRoute(),
         ],
         duration: const Duration(milliseconds: 400),
-        builder: (context, child, animation) {
+        builder: (context, child) {
           final tabsRouter = context.tabsRouter;
           return Scaffold(
-            body: FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
+            body: child,
             bottomNavigationBar: _BottomBar(tabsRouter: tabsRouter),
           );
         },
@@ -112,9 +110,13 @@ class _BottomBar extends StatelessWidget {
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(
-            icon: Icon(Icons.travel_explore), label: 'Discovery'),
+          icon: Icon(Icons.travel_explore),
+          label: 'Discovery',
+        ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle), label: 'Profile'),
+          icon: Icon(Icons.account_circle),
+          label: 'Profile',
+        ),
       ],
     );
   }

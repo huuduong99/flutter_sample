@@ -1,12 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'dart:convert';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/models/app_notification/app_notification.dart';
 import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
-
-import '../common/logging/logging_wrapper.dart';
-import '../models/app_notification.dart';
 
 class PushNotificationService {
   PushNotificationService._();
@@ -53,10 +53,11 @@ class PushNotificationService {
         AppNotification.fromJson(jsonDecode(payload));
 
     await _pushNotification(
-        id: 0,
-        title: newAppNotification.title,
-        body: newAppNotification.body,
-        payload: payload);
+      id: 0,
+      title: newAppNotification.title,
+      body: newAppNotification.body,
+      payload: payload,
+    );
   }
 
   static Future<void> _pushNotification({
@@ -102,7 +103,7 @@ class PushNotificationService {
 
     const DarwinInitializationSettings initializationSettingsIOS =
         DarwinInitializationSettings(
-      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+      onDidReceiveLocalNotification: _onDidReceiveLocalNotification,
     );
 
     const InitializationSettings initializationSettings =
@@ -113,13 +114,20 @@ class PushNotificationService {
 
     await _flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+      onDidReceiveNotificationResponse: _onDidReceiveNotificationResponse,
+      onDidReceiveBackgroundNotificationResponse:
+          _onDidReceiveNotificationResponse,
     );
 
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(_channel);
+
+    await _flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
 
     await _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -131,13 +139,17 @@ class PushNotificationService {
         );
   }
 
-  static void onDidReceiveLocalNotification(
-      int id, String? title, String? body, String? payload) async {
+  static void _onDidReceiveLocalNotification(
+    int id,
+    String? title,
+    String? body,
+    String? payload,
+  ) async {
     // display a dialog with the notification details, tap ok to go to another page
     _logger.d('id: $id');
   }
 
-  static void onDidReceiveNotificationResponse(
+  static void _onDidReceiveNotificationResponse(
     NotificationResponse notificationResponse,
   ) async {
     final String? payload = notificationResponse.payload;

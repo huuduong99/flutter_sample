@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 
 class MyBlocObserver extends BlocObserver {
   final _logger = getLogger('Flutter BLoc');

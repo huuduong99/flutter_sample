@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../generated/assets.gen.dart';
-import 'loading_image_with_percent.dart';
+import 'package:flutter_sample/generated/assets.gen.dart';
+import 'package:flutter_sample/widgets/loading_image_with_percent.dart';
 
 class ImageViewer extends StatelessWidget {
   const ImageViewer({

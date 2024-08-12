@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/models/user.dart';
+import 'package:flutter_sample/models/user/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../common/logging/logging_wrapper.dart';
-import '../../../services/config_service/config_service.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/services/config_service/config_service.dart';
 
 part 'application_bloc.freezed.dart';
 
@@ -16,9 +16,8 @@ part 'application_state.dart';
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   ApplicationBloc({
     required ConfigService secureConfigService,
-  }) : super(const ApplicationState()) {
-    _config = secureConfigService;
-
+  })  : _config = secureConfigService,
+        super(const ApplicationState()) {
     on<ApplicationLoaded>(_onApplicationLoaded);
     on<ApplicationLogoutRequested>(_onLogoutRequested);
     on<ApplicationLocaleChanged>(_onLocaleChanged);
@@ -27,7 +26,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
 
   final _logger = getLogger('ApplicationBloc');
 
-  late final ConfigService _config;
+  final ConfigService _config;
 
   /// on [ApplicationLoaded]
   ///
@@ -39,8 +38,6 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
     Emitter<ApplicationState> emit,
   ) async {
     try {
-      await _config.init();
-
       /// Check authentication status.
       final bool isAuthenticated = _config.accessToken.isNotEmpty;
 
@@ -67,7 +64,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         ),
       );
     } catch (e, s) {
-      _logger.e('ApplicationLoadFailure', e, s);
+      _logger.e('ApplicationLoadFailure', error: e, stackTrace: s);
       emit(
         state.copyWith(
           status: ApplicationStatus.startFailure,
@@ -77,23 +74,27 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   }
 
   FutureOr<void> _onLogoutRequested(
-      ApplicationLogoutRequested event, Emitter<ApplicationState> emit) async {
+    ApplicationLogoutRequested event,
+    Emitter<ApplicationState> emit,
+  ) async {
     try {
       await _config.clear();
 
       emit(
         state.copyWith(applicationHandle: ApplicationHandle.logout()),
       );
-    } catch (e, stack) {
+    } catch (e, s) {
       emit(
         state.copyWith(applicationHandle: ApplicationHandle.logout()),
       );
-      _logger.e('ApplicationLogoutRequestFailure', e, stack);
+      _logger.e('ApplicationLogoutRequestFailure', error: e, stackTrace: s);
     }
   }
 
   FutureOr<void> _onLocaleChanged(
-      ApplicationLocaleChanged event, Emitter<ApplicationState> emit) async {
+    ApplicationLocaleChanged event,
+    Emitter<ApplicationState> emit,
+  ) async {
     if (state.locale == event.locale) {
       return;
     }
@@ -107,7 +108,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         ),
       );
     } catch (e, s) {
-      _logger.e('ApplicationLocaleChangeFailure', e, s);
+      _logger.e('ApplicationLocaleChangeFailure', error: e, stackTrace: s);
       emit(
         state.copyWith(
           status: ApplicationStatus.startFailure,
@@ -117,7 +118,9 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   }
 
   FutureOr<void> _onThemeChanged(
-      ApplicationThemeChanged event, Emitter<ApplicationState> emit) async {
+    ApplicationThemeChanged event,
+    Emitter<ApplicationState> emit,
+  ) async {
     if (state.isDarkMode == event.isDarkMode) {
       return;
     }
@@ -131,7 +134,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         ),
       );
     } catch (e, s) {
-      _logger.e('ApplicationThemeChangeFailure', e, s);
+      _logger.e('ApplicationThemeChangeFailure', error: e, stackTrace: s);
       emit(
         state.copyWith(
           status: ApplicationStatus.startFailure,

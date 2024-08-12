@@ -1,200 +1,160 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
-part of 'app_router.dart';
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:auto_route/auto_route.dart' as _i10;
+import 'package:flutter/material.dart' as _i11;
+import 'package:flutter_sample/features/application/splash_page.dart' as _i9;
+import 'package:flutter_sample/features/booking/booking_page.dart' as _i1;
+import 'package:flutter_sample/features/discovery/discovery_page.dart' as _i2;
+import 'package:flutter_sample/features/home/home_page.dart' as _i3;
+import 'package:flutter_sample/features/login/login_page.dart' as _i4;
+import 'package:flutter_sample/features/media_detail/media_detail_page.dart'
+    as _i5;
+import 'package:flutter_sample/features/news_feed/news_feed_page.dart' as _i6;
+import 'package:flutter_sample/features/profile/profile_page.dart' as _i7;
+import 'package:flutter_sample/features/settings/settings_page.dart' as _i8;
 
-class _$AppRouter extends RootStackRouter {
-  _$AppRouter([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
-
-  @override
-  final Map<String, PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const SplashPage(),
-      );
-    },
-    LoginRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const LoginPage(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return AdaptivePage<String>(
-        routeData: routeData,
-        child: const HomePage(),
-      );
-    },
-    MediaDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<MediaDetailRouteArgs>();
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: MediaDetailPage(
-          key: args.key,
-          id: args.id,
-          heroTag: args.heroTag,
-        ),
-      );
-    },
-    BookingRoute.name: (routeData) {
-      final args = routeData.argsAs<BookingRouteArgs>();
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: BookingPage(
-          key: args.key,
-          modelId: args.modelId,
-        ),
-      );
-    },
-    SettingRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const SettingPage(),
-      );
-    },
-    NewsFeedRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const NewsFeedPage(),
-      );
-    },
-    DiscoveryRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const DiscoveryPage(),
-      );
-    },
-    ProfileRoute.name: (routeData) {
-      return AdaptivePage<dynamic>(
-        routeData: routeData,
-        child: const ProfilePage(),
-      );
-    },
-  };
-
-  @override
-  List<RouteConfig> get routes => [
-        RouteConfig(
-          '/#redirect',
-          path: '/',
-          redirectTo: '/splash',
-          fullMatch: true,
-        ),
-        RouteConfig(
-          SplashRoute.name,
-          path: '/splash',
-        ),
-        RouteConfig(
-          LoginRoute.name,
-          path: '/login',
-        ),
-        RouteConfig(
-          HomeRoute.name,
-          path: '/home',
-          children: [
-            RouteConfig(
-              NewsFeedRoute.name,
-              path: 'home/newsFeed',
-              parent: HomeRoute.name,
-            ),
-            RouteConfig(
-              DiscoveryRoute.name,
-              path: 'home/discovery',
-              parent: HomeRoute.name,
-            ),
-            RouteConfig(
-              ProfileRoute.name,
-              path: 'home/profile',
-              parent: HomeRoute.name,
-            ),
-          ],
-        ),
-        RouteConfig(
-          MediaDetailRoute.name,
-          path: '/mediaDetail',
-        ),
-        RouteConfig(
+/// generated route for
+/// [_i1.BookingPage]
+class BookingRoute extends _i10.PageRouteInfo<BookingRouteArgs> {
+  BookingRoute({
+    _i11.Key? key,
+    required int modelId,
+    List<_i10.PageRouteInfo>? children,
+  }) : super(
           BookingRoute.name,
-          path: '/booking',
-        ),
-        RouteConfig(
-          SettingRoute.name,
-          path: '/settings',
-        ),
-        RouteConfig(
-          '*#redirect',
-          path: '*',
-          redirectTo: '/home',
-          fullMatch: true,
-        ),
-      ];
-}
-
-/// generated route for
-/// [SplashPage]
-class SplashRoute extends PageRouteInfo<void> {
-  const SplashRoute()
-      : super(
-          SplashRoute.name,
-          path: '/splash',
+          args: BookingRouteArgs(
+            key: key,
+            modelId: modelId,
+          ),
+          initialChildren: children,
         );
 
-  static const String name = 'SplashRoute';
+  static const String name = 'BookingRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BookingRouteArgs>();
+      return _i1.BookingPage(
+        key: args.key,
+        modelId: args.modelId,
+      );
+    },
+  );
+}
+
+class BookingRouteArgs {
+  const BookingRouteArgs({
+    this.key,
+    required this.modelId,
+  });
+
+  final _i11.Key? key;
+
+  final int modelId;
+
+  @override
+  String toString() {
+    return 'BookingRouteArgs{key: $key, modelId: $modelId}';
+  }
 }
 
 /// generated route for
-/// [LoginPage]
-class LoginRoute extends PageRouteInfo<void> {
-  const LoginRoute()
+/// [_i2.DiscoveryPage]
+class DiscoveryRoute extends _i10.PageRouteInfo<void> {
+  const DiscoveryRoute({List<_i10.PageRouteInfo>? children})
       : super(
-          LoginRoute.name,
-          path: '/login',
+          DiscoveryRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'LoginRoute';
+  static const String name = 'DiscoveryRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i2.DiscoveryPage();
+    },
+  );
 }
 
 /// generated route for
-/// [HomePage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
+/// [_i3.HomePage]
+class HomeRoute extends _i10.PageRouteInfo<void> {
+  const HomeRoute({List<_i10.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
-          path: '/home',
           initialChildren: children,
         );
 
   static const String name = 'HomeRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i3.HomePage();
+    },
+  );
 }
 
 /// generated route for
-/// [MediaDetailPage]
-class MediaDetailRoute extends PageRouteInfo<MediaDetailRouteArgs> {
+/// [_i4.LoginPage]
+class LoginRoute extends _i10.PageRouteInfo<void> {
+  const LoginRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.LoginPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i5.MediaDetailPage]
+class MediaDetailRoute extends _i10.PageRouteInfo<MediaDetailRouteArgs> {
   MediaDetailRoute({
-    Key? key,
+    _i11.Key? key,
     required int id,
     required String heroTag,
+    List<_i10.PageRouteInfo>? children,
   }) : super(
           MediaDetailRoute.name,
-          path: '/mediaDetail',
           args: MediaDetailRouteArgs(
             key: key,
             id: id,
             heroTag: heroTag,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'MediaDetailRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<MediaDetailRouteArgs>();
+      return _i5.MediaDetailPage(
+        key: args.key,
+        id: args.id,
+        heroTag: args.heroTag,
+      );
+    },
+  );
 }
 
 class MediaDetailRouteArgs {
@@ -204,7 +164,7 @@ class MediaDetailRouteArgs {
     required this.heroTag,
   });
 
-  final Key? key;
+  final _i11.Key? key;
 
   final int id;
 
@@ -217,83 +177,77 @@ class MediaDetailRouteArgs {
 }
 
 /// generated route for
-/// [BookingPage]
-class BookingRoute extends PageRouteInfo<BookingRouteArgs> {
-  BookingRoute({
-    Key? key,
-    required int modelId,
-  }) : super(
-          BookingRoute.name,
-          path: '/booking',
-          args: BookingRouteArgs(
-            key: key,
-            modelId: modelId,
-          ),
-        );
-
-  static const String name = 'BookingRoute';
-}
-
-class BookingRouteArgs {
-  const BookingRouteArgs({
-    this.key,
-    required this.modelId,
-  });
-
-  final Key? key;
-
-  final int modelId;
-
-  @override
-  String toString() {
-    return 'BookingRouteArgs{key: $key, modelId: $modelId}';
-  }
-}
-
-/// generated route for
-/// [SettingPage]
-class SettingRoute extends PageRouteInfo<void> {
-  const SettingRoute()
-      : super(
-          SettingRoute.name,
-          path: '/settings',
-        );
-
-  static const String name = 'SettingRoute';
-}
-
-/// generated route for
-/// [NewsFeedPage]
-class NewsFeedRoute extends PageRouteInfo<void> {
-  const NewsFeedRoute()
+/// [_i6.NewsFeedPage]
+class NewsFeedRoute extends _i10.PageRouteInfo<void> {
+  const NewsFeedRoute({List<_i10.PageRouteInfo>? children})
       : super(
           NewsFeedRoute.name,
-          path: 'home/newsFeed',
+          initialChildren: children,
         );
 
   static const String name = 'NewsFeedRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i6.NewsFeedPage();
+    },
+  );
 }
 
 /// generated route for
-/// [DiscoveryPage]
-class DiscoveryRoute extends PageRouteInfo<void> {
-  const DiscoveryRoute()
-      : super(
-          DiscoveryRoute.name,
-          path: 'home/discovery',
-        );
-
-  static const String name = 'DiscoveryRoute';
-}
-
-/// generated route for
-/// [ProfilePage]
-class ProfileRoute extends PageRouteInfo<void> {
-  const ProfileRoute()
+/// [_i7.ProfilePage]
+class ProfileRoute extends _i10.PageRouteInfo<void> {
+  const ProfileRoute({List<_i10.PageRouteInfo>? children})
       : super(
           ProfileRoute.name,
-          path: 'home/profile',
+          initialChildren: children,
         );
 
   static const String name = 'ProfileRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i7.ProfilePage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i8.SettingPage]
+class SettingRoute extends _i10.PageRouteInfo<void> {
+  const SettingRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          SettingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i8.SettingPage();
+    },
+  );
+}
+
+/// generated route for
+/// [_i9.SplashPage]
+class SplashRoute extends _i10.PageRouteInfo<void> {
+  const SplashRoute({List<_i10.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static _i10.PageInfo page = _i10.PageInfo(
+    name,
+    builder: (data) {
+      return const _i9.SplashPage();
+    },
+  );
 }

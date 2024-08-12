@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 
-import 'firebase_options_dev.dart';
-import 'main.dart';
+import 'package:flutter_sample/firebase_options_dev.dart';
+import 'package:flutter_sample/main.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  runMain(
+    firebaseInitialization: () async {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    },
   );
-  runMain();
 }

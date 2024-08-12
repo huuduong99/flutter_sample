@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/common/helpers/string_hepler.dart';
-import '../../../common/logging/logging_wrapper.dart';
-import '../../../generated/l10n.dart';
-import '../../../services/config_service/config_service.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/generated/l10n.dart';
+import 'package:flutter_sample/services/config_service/config_service.dart';
 
 part 'login_bloc.freezed.dart';
 
@@ -28,7 +28,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final _logger = getLogger('LoginBloc');
 
   FutureOr<void> _onEmailChanged(
-      LoginEmailChanged event, Emitter<LoginState> emit) {
+    LoginEmailChanged event,
+    Emitter<LoginState> emit,
+  ) {
     final bool emailIsValid = event.email.isEmail;
 
     String? errorEmail;
@@ -38,14 +40,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     }
 
-    emit(state.copyWith(
-      email: event.email,
-      errorEmail: errorEmail,
-    ));
+    emit(
+      state.copyWith(
+        email: event.email,
+        errorEmail: errorEmail,
+      ),
+    );
   }
 
   FutureOr<void> _onPasswordChanged(
-      LoginPasswordChanged event, Emitter<LoginState> emit) {
+    LoginPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
     final bool passwordIsValid = event.password.trim().isNotEmpty;
     String? errorPassword;
 
@@ -64,7 +70,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   FutureOr<void> _onLoginButtonPressed(
-      LoginButtonPressed event, Emitter<LoginState> emit) async {
+    LoginButtonPressed event,
+    Emitter<LoginState> emit,
+  ) async {
     bool isValid = true;
 
     ///nếu có thì phải là email
@@ -78,9 +86,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
 
     if (event.password.trim().isEmpty) {
-      emit(state.copyWith(
-        errorPassword: S.current.pleaseEnterPassword,
-      ));
+      emit(
+        state.copyWith(
+          errorPassword: S.current.pleaseEnterPassword,
+        ),
+      );
       isValid = false;
     }
 

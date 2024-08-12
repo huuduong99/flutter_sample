@@ -1,14 +1,16 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_sample/services/push_notification_service/push_notification_service.dart';
 import 'package:logger/logger.dart';
 
-import '../push_notification_service.dart';
-import '../../common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 
-import 'fcm_service.dart';
+import 'package:flutter_sample/services/fcm/fcm_service.dart';
 
 class FcmServiceImpl implements FcmService {
-  final Logger _logger = getLogger("FcmService");
+  FcmServiceImpl();
+
+  final Logger _logger = getLogger('FcmService');
 
   @override
   Future<void> init() async {
@@ -28,7 +30,8 @@ class FcmServiceImpl implements FcmService {
 
     /// Listen message in background and terminated app
     FirebaseMessaging.onBackgroundMessage(
-        PushNotificationService.firebaseMessagingHandler);
+      PushNotificationService.firebaseMessagingHandler,
+    );
 
     debugPrint('fcmToken: ${await getFcmToken()}');
   }

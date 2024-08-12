@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter_sample/models/user.dart';
+import 'package:flutter_sample/models/user/user.dart';
 
-import '../../../common/logging/logging_wrapper.dart';
-import '../../../repositories/user_repository.dart';
+import 'package:flutter_sample/common/logging/logging_wrapper.dart';
+import 'package:flutter_sample/repositories/user_repository.dart';
 
 part 'media_detail_bloc.freezed.dart';
 
@@ -50,7 +50,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
           status: MediaDetailStatus.loadFailure,
         ),
       );
-      _logger.e('_MediaDetailLoadedFailure', e.toString(), s);
+      _logger.e('_MediaDetailLoadedFailure', error: e, stackTrace: s);
     }
   }
 }

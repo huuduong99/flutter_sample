@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../common/constant/spacer.dart';
-import '../../injector/app_injector.dart';
-import '../../widgets/app_button.dart';
-import '../../widgets/circle_avatar_image.dart';
-import '../../widgets/user_info_input.dart';
-import 'bloc/booking_bloc.dart';
+import 'package:flutter_sample/common/constant/spacer.dart';
+import 'package:flutter_sample/injector/app_injector.dart';
+import 'package:flutter_sample/widgets/app_button.dart';
+import 'package:flutter_sample/widgets/circle_avatar_image.dart';
+import 'package:flutter_sample/widgets/user_info_input.dart';
+import 'package:flutter_sample/features/booking/bloc/booking_bloc.dart';
 
+@RoutePage(name: 'BookingRoute')
 class BookingPage extends StatefulWidget {
   const BookingPage({Key? key, required this.modelId}) : super(key: key);
 
@@ -19,7 +21,7 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
-  final BookingBloc _bookingBloc = AppInjector.instance<BookingBloc>();
+  final BookingBloc _bookingBloc = AppInjector.get<BookingBloc>();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
@@ -33,12 +35,15 @@ class _BookingPageState extends State<BookingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          return;
+        }
         _bookingBloc.add(const BookingCancelAllChanged());
-        return true;
       },
-      child: BlocProvider.value(
+      child: BlocProvider<BookingBloc>.value(
         value: _bookingBloc,
         child: Scaffold(
           resizeToAvoidBottomInset: false,

@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_sample/injector/app_injector.dart';
-import 'package:flutter_sample/services/fcm/fcm_service.dart';
 import 'package:flutter_sample/widgets/reset_widget.dart';
 
-import 'app_router/app_router.dart';
-import 'app_router/router_observer.dart';
-import 'features/application/bloc/application_bloc.dart';
-import 'generated/l10n.dart';
+import 'package:flutter_sample/app_router/app_router.dart';
+import 'package:flutter_sample/app_router/router_observer.dart';
+import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -25,9 +24,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    AppInjector.init();
-    _applicationBloc = AppInjector.instance<ApplicationBloc>();
-    AppInjector.instance<FcmService>().init();
+    _applicationBloc = AppInjector.get<ApplicationBloc>();
     super.initState();
   }
 
@@ -46,10 +43,12 @@ class _MyAppState extends State<MyApp> {
         listenWhen: (previous, current) =>
             previous.applicationHandle != current.applicationHandle,
         listener: (context, state) {
-          state.applicationHandle?.when(logout: () {
-            AppInjector.reset();
-            RestartWidget.restartApp(context);
-          });
+          state.applicationHandle?.when(
+            logout: () {
+              AppInjector.reset();
+              RestartWidget.restartApp(context);
+            },
+          );
         },
         buildWhen: (previous, current) =>
             previous.locale != current.locale ||
@@ -74,6 +73,7 @@ class _MyAppState extends State<MyApp> {
               navigatorObservers: () => [RouterObserver()],
             ),
             routeInformationParser: _appRouter.defaultRouteParser(),
+            showSemanticsDebugger: false,
           );
         },
       ),
