@@ -59,8 +59,8 @@ class _Body extends StatelessWidget {
             title: S.of(context).language,
             content: Localizations.localeOf(context).languageCode.localeName,
             onPressed: () {
-              final List<Locale> locales = S.delegate.supportedLocales.toList();
-              locales.sort((a, b) => b.languageCode.compareTo(a.languageCode));
+              final List<Locale> locales = S.delegate.supportedLocales.toList()
+                ..sort((a, b) => b.languageCode.compareTo(a.languageCode));
               showModalBottomSheet<void>(
                 context: context,
                 shape: const RoundedRectangleBorder(
