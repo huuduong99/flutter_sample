@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_sample/models/user/user.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class UserRepository {
   final List<User> _users = const [
     User(

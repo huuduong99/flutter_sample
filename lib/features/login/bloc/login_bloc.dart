@@ -7,6 +7,7 @@ import 'package:flutter_sample/common/helpers/string_hepler.dart';
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/services/config_service/config_service.dart';
+import 'package:injectable/injectable.dart';
 
 part 'login_bloc.freezed.dart';
 
@@ -14,6 +15,7 @@ part 'login_event.dart';
 
 part 'login_state.dart';
 
+@injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     required ConfigService secureConfigService,

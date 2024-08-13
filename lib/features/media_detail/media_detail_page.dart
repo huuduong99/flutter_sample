@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
-import 'package:flutter_sample/injector/app_injector.dart';
 
 import 'package:flutter_sample/generated/l10n.dart';
+import 'package:flutter_sample/injector/injection.dart';
 import 'package:flutter_sample/models/user/user.dart';
 import 'package:flutter_sample/widgets/app_button.dart';
 import 'package:flutter_sample/widgets/image_viewer.dart';
@@ -30,7 +30,7 @@ class _MediaDetailPageState extends State<MediaDetailPage> {
 
   @override
   void initState() {
-    _mediaDetailBloc = AppInjector.get<MediaDetailBloc>()
+    _mediaDetailBloc = getInjector<MediaDetailBloc>()
       ..add(
         MediaDetailEvent.loaded(
           id: widget.id,

@@ -3,7 +3,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_sample/injector/app_injector.dart';
+import 'package:flutter_sample/injector/injection.dart';
 import 'package:flutter_sample/widgets/reset_widget.dart';
 
 import 'package:flutter_sample/app_router/app_router.dart';
@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    _applicationBloc = AppInjector.get<ApplicationBloc>();
+    _applicationBloc = getInjector<ApplicationBloc>();
     super.initState();
   }
 
@@ -45,7 +45,6 @@ class _MyAppState extends State<MyApp> {
         listener: (context, state) {
           state.applicationHandle?.when(
             logout: () {
-              AppInjector.reset();
               RestartWidget.restartApp(context);
             },
           );

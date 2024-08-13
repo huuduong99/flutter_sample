@@ -9,6 +9,7 @@ import 'package:flutter_sample/models/user/user.dart';
 
 import 'package:flutter_sample/repositories/user_repository.dart';
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
+import 'package:injectable/injectable.dart';
 
 part 'home_bloc.freezed.dart';
 
@@ -16,6 +17,7 @@ part 'home_event.dart';
 
 part 'home_state.dart';
 
+@injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required UserRepository userRepository,

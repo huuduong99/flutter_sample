@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 import 'package:flutter_sample/models/user/user.dart';
 import 'package:flutter_sample/repositories/user_repository.dart';
+import 'package:injectable/injectable.dart';
 
 part 'booking_bloc.freezed.dart';
 
@@ -12,6 +13,7 @@ part 'booking_event.dart';
 
 part 'booking_state.dart';
 
+@injectable
 class BookingBloc extends Bloc<BookingEvent, BookingState> {
   BookingBloc({
     required UserRepository userRepository,

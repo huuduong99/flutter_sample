@@ -1,17 +1,19 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_sample/services/push_notification_service/push_notification_service.dart';
+import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 
 import 'package:flutter_sample/services/fcm/fcm_service.dart';
 
+@LazySingleton(as: FcmService)
 class FcmServiceImpl implements FcmService {
-  FcmServiceImpl();
 
   final Logger _logger = getLogger('FcmService');
 
+  @PostConstruct(preResolve: true)
   @override
   Future<void> init() async {
     _logger.d('FCM init');

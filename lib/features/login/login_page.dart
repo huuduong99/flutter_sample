@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/login/bloc/login_bloc.dart';
+import 'package:flutter_sample/injector/injection.dart';
 import 'package:flutter_sample/widgets/loading_indicator.dart';
 import 'package:flutter_sample/widgets/user_info_input.dart';
 
 import 'package:flutter_sample/common/constant/spacer.dart';
 import 'package:flutter_sample/generated/assets.gen.dart';
 import 'package:flutter_sample/generated/l10n.dart';
-import 'package:flutter_sample/injector/app_injector.dart';
 import 'package:flutter_sample/widgets/app_button.dart';
 
 @RoutePage(name: 'LoginRoute')
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _loginBloc = AppInjector.get<LoginBloc>();
+    _loginBloc = getInjector<LoginBloc>();
   }
 
   @override

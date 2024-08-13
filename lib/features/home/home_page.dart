@@ -6,9 +6,9 @@ import 'package:flutter_sample/app_router/app_router.gr.dart';
 import 'package:flutter_sample/features/application/bloc/application_bloc.dart';
 
 import 'package:flutter_sample/features/home/bloc/home_bloc.dart';
+import 'package:flutter_sample/injector/injection.dart';
 import 'package:flutter_sample/services/fcm/fcm_service.dart';
 
-import 'package:flutter_sample/injector/app_injector.dart';
 
 @RoutePage(name: 'HomeRoute')
 class HomePage extends StatefulWidget {
@@ -19,8 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final HomeBloc _homeBloc = AppInjector.get<HomeBloc>();
-  final FcmService _fcmService = AppInjector.get<FcmService>();
+  final HomeBloc _homeBloc = getInjector<HomeBloc>();
+  final FcmService _fcmService = getInjector<FcmService>();
 
   @override
   void initState() {

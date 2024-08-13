@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 import 'package:flutter_sample/services/config_service/config_service.dart';
+import 'package:injectable/injectable.dart';
 
 part 'application_bloc.freezed.dart';
 
@@ -13,6 +14,7 @@ part 'application_event.dart';
 
 part 'application_state.dart';
 
+@singleton
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
   ApplicationBloc({
     required ConfigService secureConfigService,
@@ -55,7 +57,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       );
 
       emit(
-        state.copyWith(
+        ApplicationState(
           status: ApplicationStatus.startSuccess,
           isAuthenticated: isAuthenticated,
           locale: locale,

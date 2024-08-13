@@ -6,6 +6,7 @@ import 'package:flutter_sample/models/user/user.dart';
 
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
 import 'package:flutter_sample/repositories/user_repository.dart';
+import 'package:injectable/injectable.dart';
 
 part 'media_detail_bloc.freezed.dart';
 
@@ -13,6 +14,7 @@ part 'media_detail_event.dart';
 
 part 'media_detail_state.dart';
 
+@injectable
 class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
   MediaDetailBloc({
     required UserRepository userRepository,

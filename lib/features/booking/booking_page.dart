@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_sample/common/constant/spacer.dart';
-import 'package:flutter_sample/injector/app_injector.dart';
+import 'package:flutter_sample/injector/injection.dart';
 import 'package:flutter_sample/widgets/app_button.dart';
 import 'package:flutter_sample/widgets/circle_avatar_image.dart';
 import 'package:flutter_sample/widgets/user_info_input.dart';
@@ -21,7 +21,7 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
-  final BookingBloc _bookingBloc = AppInjector.get<BookingBloc>();
+  final BookingBloc _bookingBloc = getInjector<BookingBloc>();
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _phoneFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
