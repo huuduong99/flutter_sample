@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/common/bloc_core/page_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/models/user/user.dart';
 
@@ -33,7 +34,9 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
     Emitter<MediaDetailState> emit,
   ) async {
     emit(
-      state.copyWith(status: MediaDetailStatus.loading),
+      state.copyWith(
+        status: const PageStatus.loading(),
+      ),
     );
 
     try {
@@ -41,7 +44,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
       emit(
         state.copyWith(
           user: user,
-          status: MediaDetailStatus.loadSuccess,
+          status: const PageStatus.loadSuccess(),
           heroTag: event.heroTag,
         ),
       );
@@ -49,7 +52,7 @@ class MediaDetailBloc extends Bloc<MediaDetailEvent, MediaDetailState> {
       emit(
         state.copyWith(
           errorMessage: e.toString(),
-          status: MediaDetailStatus.loadFailure,
+          status: const PageStatus.loadFailed(),
         ),
       );
       _logger.e('_MediaDetailLoadedFailure', error: e, stackTrace: s);

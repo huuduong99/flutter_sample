@@ -19,17 +19,7 @@ class BookingState with _$BookingState {
     String? phoneError,
     String? addressError,
     String? errorMessage,
-    @Default(BookingStatus.initial) BookingStatus status,
+    @Default(PageStatus.initial()) PageStatus status,
   }) = _BookingState;
 }
 
-enum BookingStatus {
-  initial,
-  loading,
-  busy,
-  loaded,
-  loadFailed,
-  none,
-  updateInfoSuccess,
-  updateInfoFailure,
-}

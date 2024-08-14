@@ -8,11 +8,11 @@ import 'package:flutter_sample/services/push_notification_service/push_notificat
 import 'package:flutter_sample/widgets/reset_widget.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import 'package:flutter_sample/bloc_observer.dart';
-
 import 'package:flutter_sample/my_app.dart';
 
 import 'package:flutter_sample/injector/injection.dart';
+
+import 'package:flutter_sample/common/bloc_core/bloc_observer.dart';
 
 Future<void> runMain({
   required AsyncCallback firebaseInitialization,

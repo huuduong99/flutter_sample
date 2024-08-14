@@ -323,7 +323,7 @@ abstract class HomeViewDetail implements HomeEvent {
 
 /// @nodoc
 mixin _$HomeState {
-  HomeStatus get status => throw _privateConstructorUsedError;
+  PageStatus get status => throw _privateConstructorUsedError;
   List<User> get users => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   int get tabIndex => throw _privateConstructorUsedError;
@@ -341,13 +341,14 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {HomeStatus status,
+      {PageStatus status,
       List<User> users,
       String? errorMessage,
       int tabIndex,
       bool isBusy,
       HomeHandle? handle});
 
+  $PageStatusCopyWith<$Res> get status;
   $HomeHandleCopyWith<$Res>? get handle;
 }
 
@@ -375,7 +376,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as HomeStatus,
+              as PageStatus,
       users: null == users
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
@@ -401,6 +402,14 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
 
   @override
   @pragma('vm:prefer-inline')
+  $PageStatusCopyWith<$Res> get status {
+    return $PageStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $HomeHandleCopyWith<$Res>? get handle {
     if (_value.handle == null) {
       return null;
@@ -421,13 +430,15 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {HomeStatus status,
+      {PageStatus status,
       List<User> users,
       String? errorMessage,
       int tabIndex,
       bool isBusy,
       HomeHandle? handle});
 
+  @override
+  $PageStatusCopyWith<$Res> get status;
   @override
   $HomeHandleCopyWith<$Res>? get handle;
 }
@@ -454,7 +465,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as HomeStatus,
+              as PageStatus,
       users: null == users
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
@@ -483,7 +494,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 
 class _$HomeStateImpl extends _HomeState {
   const _$HomeStateImpl(
-      {this.status = HomeStatus.initial,
+      {this.status = const PageStatus.initial(),
       final List<User> users = const [],
       this.errorMessage,
       this.tabIndex = 0,
@@ -494,7 +505,7 @@ class _$HomeStateImpl extends _HomeState {
 
   @override
   @JsonKey()
-  final HomeStatus status;
+  final PageStatus status;
   final List<User> _users;
   @override
   @JsonKey()
@@ -554,7 +565,7 @@ class _$HomeStateImpl extends _HomeState {
 
 abstract class _HomeState extends HomeState {
   const factory _HomeState(
-      {final HomeStatus status,
+      {final PageStatus status,
       final List<User> users,
       final String? errorMessage,
       final int tabIndex,
@@ -563,7 +574,7 @@ abstract class _HomeState extends HomeState {
   const _HomeState._() : super._();
 
   @override
-  HomeStatus get status;
+  PageStatus get status;
   @override
   List<User> get users;
   @override

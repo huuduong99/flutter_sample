@@ -619,7 +619,7 @@ abstract class ApplicationThemeChanged implements ApplicationEvent {
 
 /// @nodoc
 mixin _$ApplicationState {
-  ApplicationStatus get status => throw _privateConstructorUsedError;
+  PageStatus get status => throw _privateConstructorUsedError;
   dynamic get isAuthenticated => throw _privateConstructorUsedError;
   String get locale => throw _privateConstructorUsedError;
   ApplicationHandle? get applicationHandle =>
@@ -639,13 +639,14 @@ abstract class $ApplicationStateCopyWith<$Res> {
       _$ApplicationStateCopyWithImpl<$Res, ApplicationState>;
   @useResult
   $Res call(
-      {ApplicationStatus status,
+      {PageStatus status,
       dynamic isAuthenticated,
       String locale,
       ApplicationHandle? applicationHandle,
       dynamic isDarkMode,
       User user});
 
+  $PageStatusCopyWith<$Res> get status;
   $ApplicationHandleCopyWith<$Res>? get applicationHandle;
   $UserCopyWith<$Res> get user;
 }
@@ -674,7 +675,7 @@ class _$ApplicationStateCopyWithImpl<$Res, $Val extends ApplicationState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ApplicationStatus,
+              as PageStatus,
       isAuthenticated: freezed == isAuthenticated
           ? _value.isAuthenticated
           : isAuthenticated // ignore: cast_nullable_to_non_nullable
@@ -696,6 +697,14 @@ class _$ApplicationStateCopyWithImpl<$Res, $Val extends ApplicationState>
           : user // ignore: cast_nullable_to_non_nullable
               as User,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PageStatusCopyWith<$Res> get status {
+    return $PageStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
   }
 
   @override
@@ -728,13 +737,15 @@ abstract class _$$ApplicationStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {ApplicationStatus status,
+      {PageStatus status,
       dynamic isAuthenticated,
       String locale,
       ApplicationHandle? applicationHandle,
       dynamic isDarkMode,
       User user});
 
+  @override
+  $PageStatusCopyWith<$Res> get status;
   @override
   $ApplicationHandleCopyWith<$Res>? get applicationHandle;
   @override
@@ -763,7 +774,7 @@ class __$$ApplicationStateImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as ApplicationStatus,
+              as PageStatus,
       isAuthenticated: freezed == isAuthenticated
           ? _value.isAuthenticated!
           : isAuthenticated,
@@ -788,7 +799,7 @@ class __$$ApplicationStateImplCopyWithImpl<$Res>
 
 class _$ApplicationStateImpl implements _ApplicationState {
   const _$ApplicationStateImpl(
-      {this.status = ApplicationStatus.initial,
+      {this.status = const PageStatus.initial(),
       this.isAuthenticated = false,
       this.locale = 'vi',
       this.applicationHandle,
@@ -797,7 +808,7 @@ class _$ApplicationStateImpl implements _ApplicationState {
 
   @override
   @JsonKey()
-  final ApplicationStatus status;
+  final PageStatus status;
   @override
   @JsonKey()
   final dynamic isAuthenticated;
@@ -854,7 +865,7 @@ class _$ApplicationStateImpl implements _ApplicationState {
 
 abstract class _ApplicationState implements ApplicationState {
   const factory _ApplicationState(
-      {final ApplicationStatus status,
+      {final PageStatus status,
       final dynamic isAuthenticated,
       final String locale,
       final ApplicationHandle? applicationHandle,
@@ -862,7 +873,7 @@ abstract class _ApplicationState implements ApplicationState {
       final User user}) = _$ApplicationStateImpl;
 
   @override
-  ApplicationStatus get status;
+  PageStatus get status;
   @override
   dynamic get isAuthenticated;
   @override

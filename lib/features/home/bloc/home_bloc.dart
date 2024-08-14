@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/common/bloc_core/page_status.dart';
 import 'package:flutter_sample/services/push_notification_service/push_notification_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/models/app_notification/app_notification.dart';
@@ -45,19 +46,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(
-      state.copyWith(status: HomeStatus.loading),
+      state.copyWith(
+        status: const PageStatus.loading(),
+      ),
     );
 
     try {
       final users = await _userRepository.getUsers();
       emit(
-        state.copyWith(users: users, status: HomeStatus.loadSuccess),
+        state.copyWith(
+          users: users,
+          status: const PageStatus.loadSuccess(),
+        ),
       );
     } catch (e, s) {
       emit(
         state.copyWith(
           errorMessage: e.toString(),
-          status: HomeStatus.loadFailure,
+          status: const PageStatus.loadFailed(),
         ),
       );
       _logger.e('_onHomeLoadedFailure', error: e, stackTrace: s);

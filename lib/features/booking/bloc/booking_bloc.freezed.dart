@@ -1606,7 +1606,7 @@ mixin _$BookingState {
   String? get phoneError => throw _privateConstructorUsedError;
   String? get addressError => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
-  BookingStatus get status => throw _privateConstructorUsedError;
+  PageStatus get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookingStateCopyWith<BookingState> get copyWith =>
@@ -1631,9 +1631,10 @@ abstract class $BookingStateCopyWith<$Res> {
       String? phoneError,
       String? addressError,
       String? errorMessage,
-      BookingStatus status});
+      PageStatus status});
 
   $UserCopyWith<$Res> get user;
+  $PageStatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -1710,7 +1711,7 @@ class _$BookingStateCopyWithImpl<$Res, $Val extends BookingState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as BookingStatus,
+              as PageStatus,
     ) as $Val);
   }
 
@@ -1719,6 +1720,14 @@ class _$BookingStateCopyWithImpl<$Res, $Val extends BookingState>
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PageStatusCopyWith<$Res> get status {
+    return $PageStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
     });
   }
 }
@@ -1743,10 +1752,12 @@ abstract class _$$BookingStateImplCopyWith<$Res>
       String? phoneError,
       String? addressError,
       String? errorMessage,
-      BookingStatus status});
+      PageStatus status});
 
   @override
   $UserCopyWith<$Res> get user;
+  @override
+  $PageStatusCopyWith<$Res> get status;
 }
 
 /// @nodoc
@@ -1821,7 +1832,7 @@ class __$$BookingStateImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as BookingStatus,
+              as PageStatus,
     ));
   }
 }
@@ -1841,7 +1852,7 @@ class _$BookingStateImpl implements _BookingState {
       this.phoneError,
       this.addressError,
       this.errorMessage,
-      this.status = BookingStatus.initial});
+      this.status = const PageStatus.initial()});
 
   @override
   @JsonKey()
@@ -1872,7 +1883,7 @@ class _$BookingStateImpl implements _BookingState {
   final String? errorMessage;
   @override
   @JsonKey()
-  final BookingStatus status;
+  final PageStatus status;
 
   @override
   String toString() {
@@ -1944,7 +1955,7 @@ abstract class _BookingState implements BookingState {
       final String? phoneError,
       final String? addressError,
       final String? errorMessage,
-      final BookingStatus status}) = _$BookingStateImpl;
+      final PageStatus status}) = _$BookingStateImpl;
 
   @override
   User get user;
@@ -1973,7 +1984,7 @@ abstract class _BookingState implements BookingState {
   @override
   String? get errorMessage;
   @override
-  BookingStatus get status;
+  PageStatus get status;
   @override
   @JsonKey(ignore: true)
   _$$BookingStateImplCopyWith<_$BookingStateImpl> get copyWith =>

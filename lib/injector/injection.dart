@@ -5,19 +5,23 @@
  * *
  */
 
+import 'package:api_client/api_client.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:flutter_sample/injector/injection.config.dart';
 
-final getIt = GetIt.instance;
+final _instance = GetIt.instance;
 
 @InjectableInit(
   initializerName: 'init', // default
   preferRelativeImports: true, // default
   asExtension: true, // default
+  externalPackageModulesAfter: [
+    ExternalModule(ApiClientPackageModule),
+  ],
 )
-Future<void> configureDependencies() => getIt.init();
+Future<void> configureDependencies() => _instance.init();
 
 T getInjector<T extends Object>({
   String? instanceName,
@@ -25,7 +29,7 @@ T getInjector<T extends Object>({
   dynamic param2,
   Type? type,
 }) {
-  return getIt.get<T>(
+  return _instance.get<T>(
     instanceName: instanceName,
     param1: param1,
     param2: param2,
@@ -34,8 +38,8 @@ T getInjector<T extends Object>({
 }
 
 
-void reset() => getIt.reset();
+void reset() => _instance.reset();
 
-void signalReady(Object? instance) => getIt.signalReady(instance);
+void signalReady(Object? instance) => _instance.signalReady(instance);
 
-Future<void> allReady() => getIt.allReady();
+Future<void> allReady() => _instance.allReady();

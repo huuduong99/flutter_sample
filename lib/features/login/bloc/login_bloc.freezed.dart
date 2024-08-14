@@ -549,7 +549,7 @@ abstract class LoginButtonPressed implements LoginEvent {
 
 /// @nodoc
 mixin _$LoginState {
-  LoginStatus get status => throw _privateConstructorUsedError;
+  PageStatus get status => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   bool get isBusy => throw _privateConstructorUsedError;
@@ -570,7 +570,7 @@ abstract class $LoginStateCopyWith<$Res> {
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
   $Res call(
-      {LoginStatus status,
+      {PageStatus status,
       String email,
       String password,
       bool isBusy,
@@ -579,6 +579,7 @@ abstract class $LoginStateCopyWith<$Res> {
       String? errorEmail,
       String? errorPassword});
 
+  $PageStatusCopyWith<$Res> get status;
   $LoginHandleCopyWith<$Res>? get loginHandle;
 }
 
@@ -608,7 +609,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as LoginStatus,
+              as PageStatus,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -642,6 +643,14 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
 
   @override
   @pragma('vm:prefer-inline')
+  $PageStatusCopyWith<$Res> get status {
+    return $PageStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $LoginHandleCopyWith<$Res>? get loginHandle {
     if (_value.loginHandle == null) {
       return null;
@@ -662,7 +671,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {LoginStatus status,
+      {PageStatus status,
       String email,
       String password,
       bool isBusy,
@@ -671,6 +680,8 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       String? errorEmail,
       String? errorPassword});
 
+  @override
+  $PageStatusCopyWith<$Res> get status;
   @override
   $LoginHandleCopyWith<$Res>? get loginHandle;
 }
@@ -699,7 +710,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as LoginStatus,
+              as PageStatus,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -736,7 +747,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 
 class _$LoginStateImpl extends _LoginState with DiagnosticableTreeMixin {
   const _$LoginStateImpl(
-      {this.status = LoginStatus.initial,
+      {this.status = const PageStatus.initial(),
       this.email = '',
       this.password = '',
       this.isBusy = false,
@@ -748,7 +759,7 @@ class _$LoginStateImpl extends _LoginState with DiagnosticableTreeMixin {
 
   @override
   @JsonKey()
-  final LoginStatus status;
+  final PageStatus status;
   @override
   @JsonKey()
   final String email;
@@ -820,7 +831,7 @@ class _$LoginStateImpl extends _LoginState with DiagnosticableTreeMixin {
 
 abstract class _LoginState extends LoginState {
   const factory _LoginState(
-      {final LoginStatus status,
+      {final PageStatus status,
       final String email,
       final String password,
       final bool isBusy,
@@ -831,7 +842,7 @@ abstract class _LoginState extends LoginState {
   const _LoginState._() : super._();
 
   @override
-  LoginStatus get status;
+  PageStatus get status;
   @override
   String get email;
   @override

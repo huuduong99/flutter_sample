@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/common/bloc_core/page_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter_sample/common/helpers/string_hepler.dart';
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';

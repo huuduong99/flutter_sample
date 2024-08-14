@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/common/bloc_core/page_status.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
@@ -37,13 +38,17 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     BookingLoaded event,
     Emitter<BookingState> emit,
   ) async {
-    emit(state.copyWith(status: BookingStatus.loading));
+    emit(
+      state.copyWith(
+        status: const PageStatus.loading(),
+      ),
+    );
     try {
       final user = await _userRepository.getUserById(id: event.modelId);
 
       emit(
         state.copyWith(
-          status: BookingStatus.loaded,
+          status: const PageStatus.loadSuccess(),
           user: user,
         ),
       );
@@ -51,7 +56,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       _logger.e('BookingLoadFailure', error: e, stackTrace: s);
       emit(
         state.copyWith(
-          status: BookingStatus.loadFailed,
+          status: const PageStatus.loadFailed(),
           errorMessage: e.toString(),
         ),
       );
@@ -65,7 +70,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     emit(
       state.copyWith(
         editingImage: event.imagePath,
-        status: BookingStatus.none,
       ),
     );
   }
@@ -87,7 +91,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       state.copyWith(
         editingName: event.name,
         nameError: nameError,
-        status: BookingStatus.none,
       ),
     );
   }
@@ -110,7 +113,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     // emit(state.copyWith(
     //   editingPhone: event.phoneNumber,
     //   phoneError: phoneError,
-    //   status: BookingStatus.none,
+    //   status: PageStatus.none,
     // ));
   }
 
@@ -130,7 +133,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     // emit(state.copyWith(
     //   editingEmail: event.email,
     //   emailError: emailError,
-    //   status: BookingStatus.none,
+    //   status: PageStatus.none,
     // ));
   }
 
@@ -152,7 +155,6 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
       state.copyWith(
         editingAddress: event.address,
         addressError: addressError,
-        status: BookingStatus.none,
       ),
     );
   }
@@ -161,7 +163,11 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     BookingCancelAllChanged event,
     Emitter<BookingState> emit,
   ) {
-    emit(BookingState(user: state.user, status: BookingStatus.loaded));
+    emit(
+      BookingState(
+        user: state.user,
+      ),
+    );
   }
 
   FutureOr<void> _onSaveButtonPressed(
@@ -209,7 +215,7 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     // try {
     //   emit(
     //     state.copyWith(
-    //       status: BookingStatus.loading,
+    //       status: PageStatus.loading,
     //       errorMessage: null,
     //     ),
     //   );
@@ -227,12 +233,12 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     //   final user = await _userApi.updateUserProfile(user: update);
     //
     //   emit(
-    //     BookingState(user: user, status: BookingStatus.updateInfoSuccess),
+    //     BookingState(user: user, status: PageStatus.updateInfoSuccess),
     //   );
     // } catch (e, s) {
     //   emit(
     //     state.copyWith(
-    //       status: BookingStatus.updateInfoFailure,
+    //       status: PageStatus.updateInfoFailure,
     //       errorMessage: e.toString(),
     //     ),
     //   );

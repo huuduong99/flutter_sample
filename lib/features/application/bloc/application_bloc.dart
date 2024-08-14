@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/common/bloc_core/page_status.dart';
 import 'package:flutter_sample/models/user/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -58,7 +59,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
 
       emit(
         ApplicationState(
-          status: ApplicationStatus.startSuccess,
+          status: const PageStatus.loadSuccess(),
           isAuthenticated: isAuthenticated,
           locale: locale,
           isDarkMode: isDarkMode,
@@ -66,10 +67,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         ),
       );
     } catch (e, s) {
-      _logger.e('ApplicationLoadFailure', error: e, stackTrace: s);
+      _logger.e('ApplicationLoadFailed', error: e, stackTrace: s);
       emit(
         state.copyWith(
-          status: ApplicationStatus.startFailure,
+          status: const PageStatus.loadFailed(),
         ),
       );
     }
@@ -89,7 +90,7 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
       emit(
         state.copyWith(applicationHandle: ApplicationHandle.logout()),
       );
-      _logger.e('ApplicationLogoutRequestFailure', error: e, stackTrace: s);
+      _logger.e('ApplicationLogoutRequestFailed', error: e, stackTrace: s);
     }
   }
 
@@ -110,10 +111,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         ),
       );
     } catch (e, s) {
-      _logger.e('ApplicationLocaleChangeFailure', error: e, stackTrace: s);
+      _logger.e('ApplicationLocaleChangeFailed', error: e, stackTrace: s);
       emit(
         state.copyWith(
-          status: ApplicationStatus.startFailure,
+          status: const PageStatus.loadFailed(),
         ),
       );
     }
@@ -136,10 +137,10 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         ),
       );
     } catch (e, s) {
-      _logger.e('ApplicationThemeChangeFailure', error: e, stackTrace: s);
+      _logger.e('ApplicationThemeChangeFailed', error: e, stackTrace: s);
       emit(
         state.copyWith(
-          status: ApplicationStatus.startFailure,
+          status: const PageStatus.loadFailed(),
         ),
       );
     }

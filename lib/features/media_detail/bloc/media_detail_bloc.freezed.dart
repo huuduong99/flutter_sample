@@ -240,7 +240,7 @@ abstract class MediaDetailLoaded implements MediaDetailEvent {
 
 /// @nodoc
 mixin _$MediaDetailState {
-  MediaDetailStatus get status => throw _privateConstructorUsedError;
+  PageStatus get status => throw _privateConstructorUsedError;
   User get user => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   bool get isBusy => throw _privateConstructorUsedError;
@@ -258,12 +258,13 @@ abstract class $MediaDetailStateCopyWith<$Res> {
       _$MediaDetailStateCopyWithImpl<$Res, MediaDetailState>;
   @useResult
   $Res call(
-      {MediaDetailStatus status,
+      {PageStatus status,
       User user,
       String? errorMessage,
       bool isBusy,
       String heroTag});
 
+  $PageStatusCopyWith<$Res> get status;
   $UserCopyWith<$Res> get user;
 }
 
@@ -290,7 +291,7 @@ class _$MediaDetailStateCopyWithImpl<$Res, $Val extends MediaDetailState>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as MediaDetailStatus,
+              as PageStatus,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -312,6 +313,14 @@ class _$MediaDetailStateCopyWithImpl<$Res, $Val extends MediaDetailState>
 
   @override
   @pragma('vm:prefer-inline')
+  $PageStatusCopyWith<$Res> get status {
+    return $PageStatusCopyWith<$Res>(_value.status, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value) as $Val);
@@ -328,12 +337,14 @@ abstract class _$$MediaDetailStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {MediaDetailStatus status,
+      {PageStatus status,
       User user,
       String? errorMessage,
       bool isBusy,
       String heroTag});
 
+  @override
+  $PageStatusCopyWith<$Res> get status;
   @override
   $UserCopyWith<$Res> get user;
 }
@@ -359,7 +370,7 @@ class __$$MediaDetailStateImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as MediaDetailStatus,
+              as PageStatus,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -384,7 +395,7 @@ class __$$MediaDetailStateImplCopyWithImpl<$Res>
 
 class _$MediaDetailStateImpl extends _MediaDetailState {
   const _$MediaDetailStateImpl(
-      {this.status = MediaDetailStatus.initial,
+      {this.status = const PageStatus.initial(),
       this.user = const User(),
       this.errorMessage,
       this.isBusy = false,
@@ -393,7 +404,7 @@ class _$MediaDetailStateImpl extends _MediaDetailState {
 
   @override
   @JsonKey()
-  final MediaDetailStatus status;
+  final PageStatus status;
   @override
   @JsonKey()
   final User user;
@@ -438,7 +449,7 @@ class _$MediaDetailStateImpl extends _MediaDetailState {
 
 abstract class _MediaDetailState extends MediaDetailState {
   const factory _MediaDetailState(
-      {final MediaDetailStatus status,
+      {final PageStatus status,
       final User user,
       final String? errorMessage,
       final bool isBusy,
@@ -446,7 +457,7 @@ abstract class _MediaDetailState extends MediaDetailState {
   const _MediaDetailState._() : super._();
 
   @override
-  MediaDetailStatus get status;
+  PageStatus get status;
   @override
   User get user;
   @override

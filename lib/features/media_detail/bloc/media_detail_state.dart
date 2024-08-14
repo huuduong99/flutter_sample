@@ -6,7 +6,7 @@ class MediaDetailState with _$MediaDetailState {
   const MediaDetailState._();
 
   const factory MediaDetailState({
-    @Default(MediaDetailStatus.initial) MediaDetailStatus status,
+    @Default(PageStatus.initial()) PageStatus status,
     @Default(User()) User user,
     String? errorMessage,
     @Default(false) bool isBusy,
@@ -14,9 +14,4 @@ class MediaDetailState with _$MediaDetailState {
   }) = _MediaDetailState;
 }
 
-enum MediaDetailStatus {
-  initial,
-  loading,
-  loadSuccess,
-  loadFailure,
-}
+

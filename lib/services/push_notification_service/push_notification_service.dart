@@ -39,6 +39,8 @@ class PushNotificationService {
     _logger.d('PushNotificationService init');
   }
 
+
+  /// Function must top level function or static function to handle FCM message
   static Future<void> firebaseMessagingHandler(RemoteMessage message) async {
     final payload = message.data['Payload'] ?? message.data['payload'];
     if (payload != null) {

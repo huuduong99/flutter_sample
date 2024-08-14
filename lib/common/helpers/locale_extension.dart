@@ -4,36 +4,21 @@ import 'package:flutter_sample/generated/assets.gen.dart';
 import 'package:flutter_sample/generated/l10n.dart';
 
 extension LocaleStringExtension on String {
-  String get localeName {
-    switch (this) {
-      case 'en':
-        return S.current.en;
-      case 'vi':
-        return S.current.vi;
-      default:
-        return S.current.vi;
-    }
-  }
+  String get localeName => switch (this) {
+        'en' => S.current.en,
+        'vi' => S.current.vi,
+        _ => S.current.vi
+      };
 
-  Widget get localeIcon {
-    switch (this) {
-      case 'en':
-        return Assets.icons.ukIcon.image(height: 30, width: 30);
-      case 'vi':
-        return Assets.icons.viIcon.image(height: 30, width: 30);
-      default:
-        return Assets.icons.viIcon.image(height: 30, width: 30);
-    }
-  }
+  Widget get localeIcon => switch (this) {
+        'en' => Assets.icons.ukIcon.image(height: 30, width: 30),
+        'vi' => Assets.icons.viIcon.image(height: 30, width: 30),
+        _ => Assets.icons.viIcon.image(height: 30, width: 30)
+      };
 
-  Color get localeColor {
-    switch (this) {
-      case 'en':
-        return Colors.redAccent;
-      case 'vi':
-        return Colors.blue;
-      default:
-        return Colors.blue;
-    }
-  }
+  Color get localeColor => switch (this) {
+        'en' => Colors.redAccent,
+        'vi' => Colors.blue,
+        _ => Colors.blue
+      };
 }
