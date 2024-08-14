@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/common/bloc_core/page_status.dart';
 
 import 'package:flutter_sample/common/constant/spacer.dart';
 import 'package:flutter_sample/injector/injection.dart';
@@ -92,12 +91,6 @@ class _BookingPageState extends State<BookingPage> {
                     child: _buildConfirmButton(state),
                   ),
                 ),
-                if (state.status == PageStatus.loading)
-                  Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.white.withOpacity(0.4),
-                    ),
-                  ),
               ],
             );
           },

@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/app_router/app_router.gr.dart';
-import 'package:flutter_sample/common/bloc_core/page_status.dart';
 import 'package:flutter_sample/features/media_detail/bloc/media_detail_bloc.dart';
 
 import 'package:flutter_sample/generated/l10n.dart';
@@ -63,14 +62,13 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MediaDetailBloc, MediaDetailState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        if (state.status == PageStatus.loading) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return const _ModelInfo();
-      },
+    final status = context.select((MediaDetailBloc bloc) => bloc.state.status);
+
+    return status.when(
+      initial: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      loadSuccess: () => const _ModelInfo(),
+      loadFailed: () => const SizedBox.shrink(),
     );
   }
 }
