@@ -44,6 +44,18 @@ jobs:
       - name: Statically analyze the Dart code for any errors.
         run: flutter analyze .
 
+      - name: Get flutter dependencies packages
+        run: flutter pub get
+        working-directory: ../packages/api_client
+
+      - name: Upgrade flutter dependencies
+        run: flutter pub upgrade
+        working-directory: ../packages/api_client
+
+      - name: Generate code (model, bloc) file
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+        working-directory: ../packages/api_client
+
       #    - name: Run widget tests for our flutter project.
       #      run: flutter test
 

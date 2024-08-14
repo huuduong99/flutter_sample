@@ -13,6 +13,8 @@ analyzer:
     - 'lib/**/*.freezed.dart'
     - 'lib/**/*.g.dart'
     - 'lib/generated/**'
+  errors:
+    invalid_annotation_target: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the
