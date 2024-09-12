@@ -1,10 +1,3 @@
-/*
- * *
- *  * Created by duongnh, TRUONG MINH THINH TECHNOLOGY JOINT STOCK COMPANY on 13/08/2024
- *  * Copyright (c) 2024 Mobile Team, TMT Solution . All rights reserved.
- * *
- */
-
 import 'package:api_client/api_client.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -36,7 +29,6 @@ T getInjector<T extends Object>({
     type: type,
   );
 }
-
 
 void reset() => _instance.reset();
 

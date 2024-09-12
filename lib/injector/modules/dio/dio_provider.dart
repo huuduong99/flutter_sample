@@ -1,10 +1,3 @@
-/*
- * *
- *  * Created by duongnh, TRUONG MINH THINH TECHNOLOGY JOINT STOCK COMPANY on 14/08/2024
- *  * Copyright (c) 2024 Mobile Team, TMT Solution . All rights reserved.
- * *
- */
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_sample/common/logging/logging_wrapper.dart';
